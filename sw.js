@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dabubu-v15';
+const CACHE_NAME = 'dabubu-v16';
 const ASSETS = [
   './',
   './index.html',
@@ -27,6 +27,10 @@ self.addEventListener('install', function(e) {
       return self.skipWaiting();
     })
   );
+});
+
+self.addEventListener('message', function(e) {
+  if (e.data === 'SKIP_WAITING') self.skipWaiting();
 });
 
 self.addEventListener('activate', function(e) {
