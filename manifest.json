@@ -1,0 +1,18 @@
+{
+  "name": "Dabubu Signature — Bespoke Tailoring",
+  "short_name": "Dabubu",
+  "description": "Bespoke tailoring & fashion house in Lagos. Made-to-measure occasion wear, aso-oke, and matching family sets.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F6EEE0",
+  "theme_color": "#2B0E14",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

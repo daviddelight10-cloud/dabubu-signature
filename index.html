@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dabubu Signature — Bespoke Tailoring & Fashion House</title>
+<meta name="description" content="Bespoke tailoring & fashion house in Lagos. Made-to-measure occasion wear, aso-oke, and matching family sets.">
+<meta name="theme-color" content="#2B0E14">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBP35PdYwoBc5OvYOPt6GWzF3sBmv9Azgs",
+    authDomain: "dabubu-signature.firebaseapp.com",
+    projectId: "dabubu-signature",
+    storageBucket: "dabubu-signature.firebasestorage.app",
+    messagingSenderId: "425378210926",
+    appId: "1:425378210926:web:8207b6d0196d67ac25b27f"
+  };
+  firebase.initializeApp(firebaseConfig);
+  var db = firebase.firestore();
+  var auth = firebase.auth();
+</script>
+<style>
+  :root{
+    --wine:#2B0E14;
+    --wine-deep:#1A0A0D;
+    --gold:#B8874A;
+    --gold-light:#D9B87E;
+    --ivory:#F6EEE0;
+    --ivory-dim:#EAE0CC;
+    --coral:#C1522E;
+    --emerald:#1F4D3E;
+    --ink:#1C1210;
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:450;
+    letter-spacing:-0.01em;
+    line-height:1.05;
+  }
+  .eyebrow{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:400;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    font-size:0.78rem;
+    color:var(--gold);
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 6vw;}
+  @media(max-width:640px){.wrap{padding:0 6.5vw;}}
+
+  /* ---------- stitch signature ---------- */
+  .stitch{width:100%;height:14px;display:block;overflow:visible;}
+  .stitch path{
+    fill:none;stroke:var(--gold);stroke-width:2;
+    stroke-dasharray:9 8;stroke-linecap:round;
+    stroke-dashoffset:600;animation:sew 2.4s var(--ease) forwards;
+  }
+  @keyframes sew{ to{ stroke-dashoffset:0; } }
+  .stitch.dark path{stroke:var(--gold-light);}
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 6vw;
+    transition:background .4s var(--ease),padding .4s var(--ease),box-shadow .4s var(--ease);
+  }
+  .nav.scrolled{
+    background:rgba(43,14,20,0.92);
+    backdrop-filter:blur(8px);
+    padding:14px 6vw;
+    box-shadow:0 6px 24px rgba(0,0,0,.18);
+  }
+  .nav .mark{font-family:'Fraunces',serif;font-size:1.25rem;color:var(--ivory);letter-spacing:0.01em;}
+  .nav .mark em{color:var(--gold-light);font-style:italic;}
+  .nav ul{display:flex;gap:34px;list-style:none;}
+  .nav ul a{color:var(--ivory-dim);font-size:0.86rem;letter-spacing:0.03em;position:relative;padding-bottom:4px;}
+  .nav ul a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:width .35s var(--ease);}
+  .nav ul a:hover::after{width:100%;}
+  .nav .cta-small{border:1px solid var(--gold);color:var(--gold-light);padding:8px 18px;border-radius:2px;font-size:0.8rem;letter-spacing:0.03em;}
+  .nav .cta-small:hover{background:var(--gold);color:var(--wine-deep);}
+  .nav-staff{display:flex;align-items:center;gap:14px;}
+  .nav-staff-btn{background:rgba(184,135,74,.15);border:1px solid rgba(184,135,74,.4);color:var(--gold-light);padding:7px 16px;border-radius:2px;font-size:.78rem;letter-spacing:.03em;cursor:pointer;font-family:'Jost',sans-serif;transition:all .3s var(--ease);display:flex;align-items:center;gap:6px;}
+  .nav-staff-btn:hover{background:var(--gold);color:var(--wine-deep);border-color:var(--gold);}
+  .nav-staff-btn svg{width:14px;height:14px;}
+  .nav-toggle{display:none;}
+  .nav-mobile{display:none;position:fixed;top:0;right:0;width:280px;height:100vh;background:var(--wine-deep);z-index:300;padding:80px 30px 30px;flex-direction:column;gap:8px;transform:translateX(100%);transition:transform .35s var(--ease);box-shadow:-8px 0 30px rgba(0,0,0,.3);}
+  .nav-mobile.open{transform:translateX(0);display:flex;}
+  .nav-mobile a{color:var(--ivory-dim);font-size:1rem;padding:12px 0;border-bottom:1px solid rgba(246,238,224,.08);transition:color .25s;}
+  .nav-mobile a:hover{color:var(--gold-light);}
+  .nav-mobile-close{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--ivory);font-size:1.6rem;cursor:pointer;}
+  .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:299;}
+  .nav-overlay.show{display:block;}
+  .nav ul a.active{color:var(--gold-light);}
+  .nav ul a.active::after{width:100%;}
+  @media(max-width:860px){
+    .nav ul{display:none;}
+    .nav-toggle{display:block;color:var(--ivory);font-size:1.4rem;background:none;border:none;cursor:pointer;}
+    .nav-staff .cta-small{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;background:var(--wine-deep);overflow:hidden;}
+  .hero-img{position:absolute;inset:0;background:linear-gradient(135deg,var(--wine) 0%,var(--wine-deep) 50%,#3a1518 100%);background-size:cover;background-position:center 18%;animation:kenburns 18s ease-in-out infinite alternate;}
+  @keyframes kenburns{from{transform:scale(1) translateY(0);}to{transform:scale(1.08) translateY(-12px);}}
+  .hero-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,10,13,0.15) 0%,rgba(26,10,13,0.05) 30%,rgba(26,10,13,0.55) 68%,rgba(26,10,13,0.94) 100%),linear-gradient(90deg,rgba(26,10,13,0.55) 0%,rgba(26,10,13,0) 45%);}
+  .hero-content{position:relative;z-index:2;width:100%;padding:0 6vw 64px;color:var(--ivory);}
+  .hero-content .eyebrow{color:var(--gold-light);opacity:0;animation:fadeUp .8s var(--ease) .3s forwards;}
+  .hero-content h1{font-size:clamp(2.6rem,6.4vw,5.2rem);max-width:14ch;margin:14px 0 22px;color:var(--ivory);opacity:0;animation:fadeUp .8s var(--ease) .5s forwards;}
+  .hero-content h1 i{color:var(--gold-light);font-style:italic;}
+  .hero-content p{max-width:42ch;font-size:1.02rem;color:var(--ivory-dim);margin-bottom:30px;line-height:1.6;opacity:0;animation:fadeUp .8s var(--ease) .7s forwards;}
+  .hero-content .btn-row{opacity:0;animation:fadeUp .8s var(--ease) .9s forwards;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  .btn-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;font-size:0.88rem;letter-spacing:0.04em;border-radius:2px;transition:transform .3s var(--ease),background .3s var(--ease),color .3s var(--ease),box-shadow .3s var(--ease);cursor:pointer;border:none;}
+  .btn-gold{background:var(--gold);color:var(--wine-deep);}
+  .btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 10px 26px rgba(184,135,74,.35);}
+  .btn-ghost{border:1px solid rgba(246,238,224,.5);color:var(--ivory);background:transparent;}
+  .btn-ghost:hover{border-color:var(--ivory);background:rgba(246,238,224,.08);transform:translateY(-2px);}
+  .hero-stitch{position:absolute;bottom:0;left:0;width:100%;z-index:3;}
+  .scroll-cue{position:absolute;right:6vw;bottom:36px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ivory-dim);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;}
+  @media(max-width:640px){.scroll-cue{display:none;}}
+  .scroll-cue .line{width:1px;height:46px;background:linear-gradient(var(--gold-light),transparent);animation:cue 1.8s ease-in-out infinite;}
+  @keyframes cue{0%{transform:scaleY(0.4);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}100%{transform:scaleY(0.4);transform-origin:bottom;}}
+
+  /* ---------- intro ---------- */
+  .intro{padding:120px 0 90px;text-align:center;}
+  .intro .eyebrow{display:block;margin-bottom:16px;}
+  .intro h2{font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:20ch;margin:0 auto 26px;}
+  .intro h2 i{color:var(--coral);font-style:italic;}
+  .intro p{max-width:56ch;margin:0 auto;color:#4a3b34;line-height:1.85;font-size:1.02rem;}
+  .intro-stitch{max-width:220px;margin:38px auto 0;}
+
+  /* ---------- services ---------- */
+  .services{padding:40px 0 110px;}
+  .services-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:56px;flex-wrap:wrap;}
+  .services-head h2{font-size:clamp(1.9rem,3.4vw,2.6rem);max-width:16ch;}
+  .services-head p{max-width:34ch;color:#5c4b42;font-size:.95rem;line-height:1.7;}
+  .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--wine);}
+  @media(max-width:980px){.service-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.service-grid{grid-template-columns:1fr;}}
+  .service-card{background:var(--ivory);padding:38px 28px 34px;position:relative;overflow:hidden;transition:background .4s var(--ease),color .4s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease);}
+  .service-card:hover{background:var(--wine);color:var(--ivory);transform:translateY(-4px);box-shadow:0 12px 30px rgba(43,14,20,.15);}
+  .service-card:hover .service-num{color:var(--gold-light);}
+  .service-card:hover p{color:var(--ivory-dim);}
+  .service-card:hover .service-icon{color:var(--gold-light);}
+  .service-icon{width:32px;height:32px;color:var(--gold);margin-bottom:18px;transition:color .4s var(--ease);}
+  .service-icon svg{width:100%;height:100%;}
+  .service-num{font-family:'Fraunces',serif;font-style:italic;font-size:.85rem;color:var(--coral);display:block;margin-bottom:26px;transition:color .4s var(--ease);}
+  .service-card h3{font-size:1.28rem;margin-bottom:12px;}
+  .service-card p{color:#5c4b42;font-size:.92rem;line-height:1.65;transition:color .4s var(--ease);}
+
+  /* ---------- gallery ---------- */
+  .gallery{background:var(--wine-deep);padding:110px 0 100px;position:relative;}
+  .gallery::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(184,135,74,0.10),transparent 55%);pointer-events:none;}
+  .gallery-head{text-align:center;margin-bottom:56px;position:relative;z-index:1;}
+  .gallery-head .eyebrow{color:var(--gold-light);}
+  .gallery-head h2{color:var(--ivory);font-size:clamp(1.9rem,3.6vw,2.8rem);margin-top:14px;}
+  .masonry{columns:4 220px;column-gap:14px;position:relative;z-index:1;}
+  @media(max-width:680px){.masonry{columns:2 160px;}}
+  .masonry figure{break-inside:avoid;margin:0 0 14px;position:relative;overflow:hidden;border-radius:2px;background:var(--wine);}
+  .masonry figure img{width:100%;height:auto;display:block;transition:transform .7s var(--ease),filter .5s var(--ease);}
+  .masonry figure:hover img{transform:scale(1.06);filter:saturate(1.08);}
+  .masonry figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 14px;background:linear-gradient(0deg,rgba(26,10,13,.92),rgba(26,10,13,0));color:var(--ivory-dim);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease),transform .4s var(--ease);}
+  .masonry figure:hover figcaption{opacity:1;transform:translateY(0);}
+  .masonry figure{cursor:pointer;}
+  .masonry figure.gallery-hidden{display:none;}
+  .masonry figure.gallery-reveal{animation:galleryFade .5s var(--ease) both;}
+  @keyframes galleryFade{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  .gallery-more-wrap{text-align:center;margin-top:40px;position:relative;z-index:1;}
+  .gallery-more-btn{background:transparent;border:1px solid var(--gold);color:var(--gold-light);padding:14px 36px;border-radius:2px;font-size:.85rem;letter-spacing:.04em;cursor:pointer;font-family:'Jost',sans-serif;transition:all .3s var(--ease);display:inline-flex;align-items:center;gap:8px;}
+  .gallery-more-btn:hover{background:var(--gold);color:var(--wine-deep);transform:translateY(-2px);}
+  .gallery-more-btn svg{width:16px;height:16px;transition:transform .3s var(--ease);}
+  .gallery-more-btn.expanded svg{transform:rotate(180deg);}
+
+  /* ---------- Lightbox ---------- */
+  .lightbox{display:none;position:fixed;inset:0;background:rgba(26,10,13,.95);z-index:1500;justify-content:center;align-items:center;padding:40px;flex-direction:column;}
+  .lightbox.show{display:flex;}
+  .lightbox img{max-width:90vw;max-height:80vh;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+  .lightbox-close{position:absolute;top:20px;right:24px;background:none;border:none;color:var(--ivory);font-size:2rem;cursor:pointer;opacity:.7;transition:opacity .2s;}
+  .lightbox-close:hover{opacity:1;}
+  .lightbox-caption{color:var(--gold-light);font-size:.85rem;letter-spacing:.05em;text-transform:uppercase;margin-top:16px;}
+  .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(184,135,74,.2);border:1px solid rgba(184,135,74,.4);color:var(--ivory);width:48px;height:48px;border-radius:50%;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .25s;}
+  .lightbox-nav:hover{background:var(--gold);color:var(--wine-deep);}
+  .lightbox-prev{left:24px;}
+  .lightbox-next{right:24px;}
+
+  /* ---------- process ---------- */
+  .process{padding:110px 0;}
+  .process-head{text-align:center;margin-bottom:70px;}
+  .process-head h2{font-size:clamp(1.9rem,3.4vw,2.6rem);}
+  .process-list{display:grid;grid-template-columns:repeat(4,1fr);gap:36px;}
+  @media(max-width:900px){.process-list{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.process-list{grid-template-columns:1fr;}}
+  .process-step{position:relative;padding-left:2px;}
+  .process-step .pnum{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:300;color:var(--gold);display:block;margin-bottom:14px;font-style:italic;}
+  .process-step h3{font-size:1.1rem;margin-bottom:10px;}
+  .process-step p{font-size:.9rem;color:#5c4b42;line-height:1.65;}
+  .process-step:not(:last-child)::after{content:"";position:absolute;top:24px;left:110%;width:60%;height:1px;background:repeating-linear-gradient(90deg,var(--gold) 0 8px,transparent 8px 15px);display:block;}
+  @media(max-width:900px){.process-step::after{display:none;}}
+
+  /* ---------- trust ---------- */
+  .trust{background:var(--ivory-dim);padding:80px 0;}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;text-align:center;}
+  @media(max-width:760px){.trust-grid{grid-template-columns:repeat(2,1fr);gap:40px;}}
+  .trust-num{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,2.8rem);color:var(--wine);}
+  .trust-label{font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:#6b584d;margin-top:8px;}
+
+  /* ---------- about ---------- */
+  .about{display:grid;grid-template-columns:0.9fr 1.1fr;background:var(--ivory);}
+  @media(max-width:860px){.about{grid-template-columns:1fr;}}
+  .about-img{min-height:520px;background-size:cover;background-position:center 20%;background:linear-gradient(135deg,var(--wine-deep),var(--wine));}
+  .about-copy{padding:100px 7vw;display:flex;flex-direction:column;justify-content:center;}
+  .about-copy h2{font-size:clamp(1.9rem,3.2vw,2.5rem);margin:14px 0 22px;max-width:14ch;}
+  .about-copy p{color:#4a3b34;line-height:1.85;margin-bottom:18px;max-width:48ch;}
+  .about-copy .btn{align-self:flex-start;margin-top:8px;}
+  .about-stats{display:flex;gap:40px;margin-top:30px;padding-top:30px;border-top:1px solid rgba(43,14,20,.1);}
+  .about-stat-num{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--wine);font-style:italic;}
+  .about-stat-label{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:#6b584d;margin-top:4px;}
+  @media(max-width:560px){.about-stats{gap:24px;flex-wrap:wrap;}}
+
+  /* ---------- cta / footer ---------- */
+  .cta{background:var(--wine-deep);color:var(--ivory);padding:130px 0 70px;text-align:center;position:relative;overflow:hidden;}
+  .cta::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(184,135,74,.14),transparent 60%);}
+  .cta-inner{position:relative;z-index:1;}
+  .cta .eyebrow{color:var(--gold-light);}
+  .cta h2{font-size:clamp(2.2rem,5vw,3.6rem);margin:16px auto 22px;max-width:16ch;}
+  .cta p{color:var(--ivory-dim);max-width:44ch;margin:0 auto 34px;line-height:1.7;}
+  .cta .btn-row{justify-content:center;margin-bottom:50px;}
+  /* ---------- Quick booking form ---------- */
+  .booking-form{max-width:560px;margin:0 auto 60px;background:rgba(246,238,224,.06);border:1px solid rgba(184,135,74,.2);border-radius:6px;padding:36px 32px;text-align:left;}
+  .booking-form h3{color:var(--ivory);font-size:1.2rem;margin-bottom:6px;text-align:center;}
+  .booking-form .booking-sub{color:var(--ivory-dim);font-size:.85rem;text-align:center;margin-bottom:24px;}
+  .booking-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:560px){.booking-row{grid-template-columns:1fr;}}
+  .booking-form label{display:block;font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;color:var(--gold-light);margin-bottom:6px;}
+  .booking-form input,.booking-form select{width:100%;background:rgba(26,10,13,.4);border:1px solid rgba(184,135,74,.25);border-radius:3px;padding:12px 14px;color:var(--ivory);font-family:'Jost',sans-serif;font-size:.9rem;transition:border-color .25s;}
+  .booking-form input:focus,.booking-form select:focus{outline:none;border-color:var(--gold);}
+  .booking-form input::placeholder{color:rgba(246,238,224,.35);}
+  .booking-form select option{background:var(--wine-deep);color:var(--ivory);}
+  .booking-submit{width:100%;margin-top:8px;justify-content:center;}
+  .booking-note{text-align:center;font-size:.76rem;color:rgba(246,238,224,.4);margin-top:12px;}
+  /* ---------- FAQ accordion ---------- */
+  .faq{background:var(--ivory);padding:100px 0;}
+  .faq-head{text-align:center;margin-bottom:50px;}
+  .faq-head .eyebrow{display:block;margin-bottom:10px;}
+  .faq-head h2{font-size:clamp(1.9rem,3.4vw,2.6rem);}
+  .faq-list{max-width:760px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid rgba(43,14,20,.1);}
+  .faq-q{width:100%;background:none;border:none;text-align:left;padding:22px 0;font-family:'Fraunces',serif;font-size:1.08rem;color:var(--wine);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:color .25s;}
+  .faq-q:hover{color:var(--gold);}
+  .faq-q .faq-icon{flex-shrink:0;width:20px;height:20px;position:relative;}
+  .faq-q .faq-icon::before,.faq-q .faq-icon::after{content:"";position:absolute;background:var(--gold);border-radius:1px;transition:transform .3s var(--ease);}
+  .faq-q .faq-icon::before{top:50%;left:0;width:100%;height:2px;transform:translateY(-50%);}
+  .faq-q .faq-icon::after{left:50%;top:0;width:2px;height:100%;transform:translateX(-50%);}
+  .faq-item.open .faq-icon::after{transform:translateX(-50%) scaleY(0);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease);}
+  .faq-a-inner{padding:0 28px 22px 0;color:#5c4b42;font-size:.92rem;line-height:1.7;}
+  /* ---------- Floating WhatsApp ---------- */
+  .float-wa{position:fixed;bottom:28px;left:28px;width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:500;box-shadow:0 6px 20px rgba(37,211,102,.4);transition:transform .3s var(--ease),box-shadow .3s var(--ease);}
+  .float-wa:hover{transform:scale(1.08);box-shadow:0 8px 28px rgba(37,211,102,.5);}
+  .float-wa svg{width:28px;height:28px;}
+  .float-wa-badge{position:absolute;top:-2px;right:-2px;width:16px;height:16px;background:var(--coral);border-radius:50%;border:2px solid var(--wine-deep);animation:waPulse 2s ease-in-out infinite;}
+  @keyframes waPulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+  @media(max-width:640px){.float-wa{bottom:20px;left:20px;width:48px;height:48px;}.float-wa svg{width:24px;height:24px;}}
+  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;text-align:left;padding-top:56px;border-top:1px solid rgba(246,238,224,.12);position:relative;z-index:1;}
+  @media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr;row-gap:36px;}}
+  .footer-grid .mark{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--ivory);margin-bottom:12px;}
+  .footer-grid .mark em{color:var(--gold-light);font-style:italic;}
+  .footer-grid p{color:var(--ivory-dim);font-size:.88rem;line-height:1.7;max-width:32ch;}
+  .footer-col h4{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px;font-weight:500;}
+  .footer-col ul{list-style:none;}
+  .footer-col li{margin-bottom:10px;}
+  .footer-col a{color:var(--ivory-dim);font-size:.9rem;transition:color .25s;}
+  .footer-col a:hover{color:var(--gold-light);}
+  .admin-link{color:rgba(246,238,224,.35);font-size:.8rem;cursor:pointer;transition:color .25s;}
+  .admin-link:hover{color:var(--gold-light);}
+  .footer-bottom{max-width:1240px;margin:60px auto 0;padding:22px 6vw 0;border-top:1px solid rgba(246,238,224,.1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.78rem;color:rgba(246,238,224,.5);}
+  .footer-socials{display:flex;gap:14px;margin-top:16px;}
+  .footer-socials a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(184,135,74,.35);display:flex;align-items:center;justify-content:center;color:var(--gold-light);transition:all .3s var(--ease);}
+  .footer-socials a:hover{background:var(--gold);color:var(--wine-deep);border-color:var(--gold);transform:translateY(-2px);}
+  .footer-socials svg{width:16px;height:16px;}
+  .btn-whatsapp{background:#25D366;color:#fff;display:inline-flex;align-items:center;gap:8px;}
+  .btn-whatsapp:hover{background:#1da851;transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,211,102,.3);}
+  .btn-whatsapp svg{width:18px;height:18px;}
+
+  /* ---------- Back to top ---------- */
+  .back-top{position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--wine-deep);border:none;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:500;box-shadow:0 6px 20px rgba(0,0,0,.2);}
+  .back-top.show{opacity:1;pointer-events:auto;}
+  .back-top:hover{transform:translateY(-3px);background:var(--gold-light);}
+
+  /* ---------- Page loader ---------- */
+  .page-loader{position:fixed;inset:0;background:var(--wine-deep);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;transition:opacity .6s var(--ease);}
+  .page-loader.hide{opacity:0;pointer-events:none;}
+  .page-loader .loader-mark{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--ivory);letter-spacing:.02em;}
+  .page-loader .loader-mark em{color:var(--gold-light);font-style:italic;}
+  .page-loader .loader-bar{width:120px;height:2px;background:rgba(184,135,74,.2);border-radius:2px;overflow:hidden;}
+  .page-loader .loader-bar::after{content:"";display:block;width:40%;height:100%;background:var(--gold);border-radius:2px;animation:loadbar 1s ease-in-out infinite;}
+  @keyframes loadbar{0%{transform:translateX(-100%);}100%{transform:translateX(350%);}}
+
+  /* ---------- Custom scrollbar ---------- */
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--wine-deep);}
+  ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold-light);}
+  html{scrollbar-color:var(--gold) var(--wine-deep);scrollbar-width:thin;}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.001s !important;transition-duration:.001s !important;}html{scroll-behavior:auto;}}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+  /* ========================================
+     ADMIN SCREENS (login + dashboard)
+     ======================================== */
+  .admin-screen{display:none;position:fixed;inset:0;z-index:200;}
+
+  /* ---------- Login ---------- */
+  #admin-login{background:var(--wine-deep);align-items:center;justify-content:center;}
+  #admin-login.show{display:flex;}
+  .login-card{
+    background:var(--ivory);
+    border-radius:6px;
+    padding:52px 40px 44px;
+    max-width:380px;
+    width:90%;
+    text-align:center;
+    box-shadow:0 24px 70px rgba(0,0,0,.45);
+    animation:rise .5s var(--ease) both;
+    position:relative;
+    overflow:hidden;
+  }
+  .login-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));}
+  .login-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:repeating-linear-gradient(90deg,var(--gold) 0 8px,transparent 8px 15px);}
+  .login-icon{font-size:2.2rem;color:var(--gold);margin-bottom:16px;display:block;}
+  .login-card .mark{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--wine);margin-bottom:6px;}
+  .login-card .mark em{color:var(--gold);font-style:italic;}
+  .login-card .eyebrow{display:block;margin-bottom:24px;}
+  .login-card input{
+    width:100%;padding:14px 18px;border:1px solid var(--ivory-dim);
+    border-radius:2px;font-family:'Jost',sans-serif;font-size:1rem;
+    margin-bottom:16px;background:white;color:var(--ink);
+  }
+  .login-card input:focus{outline:none;border-color:var(--gold);}
+  .login-card .btn{width:100%;justify-content:center;margin-bottom:10px;}
+  .login-card .btn-text{background:none;border:none;color:#6b584d;font-size:.85rem;cursor:pointer;font-family:'Jost',sans-serif;padding:8px;}
+  .login-card .btn-text:hover{color:var(--wine);}
+  #login-error{color:#c0392b;font-size:.85rem;margin-top:8px;min-height:20px;}
+
+  /* ---------- Admin Dashboard (Sidebar Layout) ---------- */
+  #admin-dashboard{background:var(--ivory-dim);overflow:hidden;}
+  #admin-dashboard.show{display:flex;}
+
+  .admin-sidebar{
+    width:260px;min-width:260px;background:linear-gradient(180deg,var(--wine) 0%,var(--wine-deep) 100%);
+    display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:60;
+    border-right:2px solid var(--gold);transition:transform .3s var(--ease);
+  }
+  .sidebar-header{padding:24px 24px 20px;border-bottom:1px solid rgba(184,135,74,.2);}
+  .sidebar-header .mark{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--ivory);line-height:1.2;}
+  .sidebar-header .mark em{color:var(--gold-light);font-style:italic;}
+  .sidebar-header .sidebar-sub{font-size:.72rem;color:rgba(246,238,224,.4);letter-spacing:.08em;text-transform:uppercase;margin-top:6px;}
+
+  .sidebar-nav{flex:1;padding:16px 12px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;}
+  .sidebar-nav::-webkit-scrollbar{width:4px;}
+  .sidebar-nav::-webkit-scrollbar-thumb{background:rgba(184,135,74,.3);border-radius:2px;}
+  .sidebar-item{
+    display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:8px;
+    background:none;border:none;color:rgba(246,238,224,.6);cursor:pointer;
+    font-family:'Jost',sans-serif;font-size:.92rem;text-align:left;width:100%;
+    transition:all .25s var(--ease);position:relative;
+  }
+  .sidebar-item:hover{background:rgba(184,135,74,.12);color:var(--ivory);}
+  .sidebar-item.active{background:rgba(184,135,74,.18);color:var(--gold-light);}
+  .sidebar-item.active::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:24px;background:var(--gold);border-radius:0 2px 2px 0;}
+  .sidebar-item svg{width:20px;height:20px;flex-shrink:0;opacity:.8;}
+  .sidebar-item.active svg{opacity:1;}
+  .sidebar-badge{background:var(--coral);color:white;border-radius:10px;font-size:.7rem;padding:2px 8px;margin-left:auto;font-weight:600;}
+  .sidebar-item.active .sidebar-badge{background:var(--coral);}
+
+  .sidebar-footer{padding:16px 12px;border-top:1px solid rgba(184,135,74,.2);display:flex;flex-direction:column;gap:4px;}
+  .sidebar-footer .sidebar-item{font-size:.85rem;padding:10px 16px;}
+
+  .admin-content{flex:1;margin-left:260px;overflow-y:auto;height:100vh;padding:32px 40px;max-width:1000px;}
+  .admin-content::-webkit-scrollbar{width:8px;}
+  .admin-content::-webkit-scrollbar-track{background:var(--ivory-dim);}
+  .admin-content::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+
+  .content-header{margin-bottom:28px;}
+  .content-header h2{font-size:1.8rem;color:var(--wine);margin-bottom:4px;font-family:'Fraunces',serif;}
+  .content-header .tab-sub{color:#6b584d;font-size:.92rem;}
+
+  .admin-tab{display:none;animation:fadeIn .3s var(--ease);}
+  .admin-tab.show{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  /* Mobile sidebar toggle */
+  .sidebar-toggle{display:none;position:fixed;top:16px;left:16px;z-index:70;width:42px;height:42px;border-radius:8px;background:var(--wine);color:var(--gold-light);border:none;cursor:pointer;font-size:1.3rem;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.2);}
+  .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:55;}
+  .sidebar-overlay.show{display:block;}
+
+  @media(max-width:860px){
+    .admin-sidebar{transform:translateX(-100%);}
+    .admin-sidebar.open{transform:translateX(0);}
+    .admin-content{margin-left:0;padding:24px 20px 24px 20px;}
+    .sidebar-toggle{display:flex;}
+    .sidebar-toggle.hidden{display:none;}
+    .sidebar-overlay.show + .admin-sidebar ~ .sidebar-toggle,
+    .admin-sidebar.open ~ .sidebar-toggle{display:none;}
+  }
+
+  /* ---------- Form ---------- */
+  .form-card{background:white;border-radius:8px;padding:36px 32px;box-shadow:0 4px 20px rgba(0,0,0,.07);margin-bottom:24px;border-top:3px solid var(--gold);}
+  .form-card h3{font-size:1.1rem;color:var(--wine);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--ivory-dim);}
+  .customer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;}
+  @media(max-width:640px){.customer-grid{grid-template-columns:1fr;}}
+  .customer-grid label{display:block;font-size:.82rem;letter-spacing:.02em;color:#6b584d;margin-bottom:6px;}
+  .customer-grid input,.customer-grid select,.customer-grid datalist{
+    width:100%;padding:11px 14px;border:1px solid var(--ivory-dim);border-radius:2px;
+    font-family:'Jost',sans-serif;font-size:.95rem;color:var(--ink);background:white;
+  }
+  .customer-grid input:focus,.customer-grid select:focus{outline:none;border-color:var(--gold);}
+  form input.valid{border-color:var(--emerald) !important;}
+  form input.invalid{border-color:#c0392b !important;}
+  .field-hint{font-size:.78rem;color:#c0392b;margin-top:4px;display:none;}
+  .field-hint.show{display:block;}
+
+  .edit-banner{
+    display:none;background:var(--coral);color:white;padding:12px 18px;border-radius:2px;
+    margin-bottom:20px;font-size:.88rem;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+  .edit-banner.show{display:flex;}
+  .btn-cancel-edit{background:white;color:var(--coral);border:none;padding:7px 16px;border-radius:2px;font-size:.82rem;cursor:pointer;font-family:'Jost',sans-serif;}
+
+  .measurement-row{display:flex;gap:10px;align-items:center;margin-bottom:10px;}
+  .measurement-row input{padding:10px 14px;border:1px solid var(--ivory-dim);border-radius:2px;font-family:'Jost',sans-serif;font-size:.92rem;}
+  .measurement-row .m-name{flex:1;}
+  .measurement-row .m-value{flex:1;}
+  .btn-remove{background:var(--wine);color:var(--ivory);border:none;width:34px;height:34px;border-radius:2px;cursor:pointer;font-size:.9rem;flex-shrink:0;}
+  .btn-remove:hover{background:var(--wine-deep);}
+  .btn-add{background:var(--ivory-dim);color:var(--wine);border:none;padding:10px 20px;border-radius:2px;font-size:.88rem;cursor:pointer;font-family:'Jost',sans-serif;margin-top:4px;}
+  .btn-add:hover{background:var(--gold);color:var(--wine-deep);}
+
+  textarea{width:100%;padding:12px 14px;border:1px solid var(--ivory-dim);border-radius:2px;font-family:'Jost',sans-serif;font-size:.95rem;resize:vertical;}
+  textarea:focus{outline:none;border-color:var(--gold);}
+
+  .btn-save{background:var(--wine);color:var(--ivory);border:none;padding:15px 34px;border-radius:2px;font-size:.92rem;letter-spacing:.04em;cursor:pointer;font-family:'Jost',sans-serif;transition:background .25s;}
+  .btn-save:hover{background:var(--gold);color:var(--wine-deep);}
+
+  /* ---------- Stats Bar ---------- */
+  .stats-bar{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;}
+  .stat-card{flex:1;min-width:130px;padding:20px 16px;border-radius:8px;color:white;text-align:center;transition:transform .2s var(--ease),box-shadow .2s var(--ease);}
+  .stat-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.15);}
+  .stat-icon{font-size:1.4rem;display:block;margin-bottom:6px;}
+  .stat-number{font-family:'Fraunces',serif;font-size:1.8rem;display:block;}
+  .stat-label{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;opacity:.85;margin-top:4px;display:block;}
+  .stat-total{background:var(--wine);}
+  .stat-pending{background:var(--coral);}
+  .stat-progress{background:#3498db;}
+  .stat-ready{background:var(--emerald);}
+  @media(max-width:640px){.stats-bar{flex-direction:column;}.stat-card{min-width:100%;}}
+
+  /* ---------- Dashboard Quick Actions ---------- */
+  .dashboard-quick-actions{margin-top:36px;}
+  .dashboard-quick-actions h3,.dashboard-status-breakdown h3{
+    font-size:1.1rem;color:var(--wine);margin-bottom:16px;font-family:'Fraunces',serif;
+  }
+  .dashboard-action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .dashboard-action-card{
+    background:white;border-radius:8px;padding:24px 20px;border:none;cursor:pointer;
+    text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:all .25s var(--ease);
+    border-top:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  .dashboard-action-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.12);transform:translateY(-2px);}
+  .dashboard-action-icon{font-size:2rem;color:var(--gold);}
+  .dashboard-action-title{font-size:1rem;font-weight:600;color:var(--wine);font-family:'Fraunces',serif;}
+  .dashboard-action-desc{font-size:.82rem;color:#95a5a6;}
+  @media(max-width:640px){.dashboard-action-grid{grid-template-columns:1fr;}}
+  .dashboard-status-breakdown{margin-top:36px;}
+
+  /* ---------- Status Tabs ---------- */
+  .status-tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;}
+  .status-tab{
+    padding:8px 18px;border-radius:20px;border:1px solid var(--ivory-dim);background:white;
+    font-family:'Jost',sans-serif;font-size:.85rem;color:#6b584d;cursor:pointer;
+    transition:all .25s var(--ease);display:flex;align-items:center;gap:6px;
+  }
+  .status-tab:hover{border-color:var(--gold);color:var(--wine);}
+  .status-tab.active{background:var(--wine);color:var(--ivory);border-color:var(--wine);}
+  .status-tab .tab-count{font-size:.72rem;background:rgba(255,255,255,.2);padding:1px 7px;border-radius:10px;}
+  .status-tab:not(.active) .tab-count{background:var(--ivory-dim);color:var(--wine);}
+
+  /* ---------- Search Bar ---------- */
+  .search-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
+  .search-bar input,.search-bar select{
+    padding:10px 14px;border:1px solid var(--ivory-dim);border-radius:2px;
+    font-family:'Jost',sans-serif;font-size:.9rem;background:white;color:var(--ink);
+  }
+  .search-bar input{flex:1;min-width:200px;}
+  .search-bar input:focus,.search-bar select:focus{outline:none;border-color:var(--gold);}
+  .btn-clear,.btn-export{
+    border:none;padding:10px 18px;border-radius:2px;font-size:.85rem;cursor:pointer;
+    font-family:'Jost',sans-serif;transition:opacity .2s;
+  }
+  .btn-clear{background:var(--ivory-dim);color:var(--wine);}
+  .btn-clear:hover{opacity:.8;}
+  .btn-export{background:var(--gold);color:var(--wine-deep);}
+  .btn-export:hover{opacity:.85;}
+  .search-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .search-row select{padding:10px 14px;border:1px solid var(--ivory-dim);border-radius:2px;font-size:.9rem;cursor:pointer;font-family:'Jost',sans-serif;background:white;color:var(--ink);}
+  .search-row select:focus{outline:none;border-color:var(--gold);}
+  .more-filters{display:none;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px;}
+  .more-filters.show{display:flex;}
+  .more-filters-toggle{background:none;border:none;color:var(--gold);font-size:.82rem;cursor:pointer;font-family:'Jost',sans-serif;padding:4px 0;}
+  .more-filters-toggle:hover{text-decoration:underline;}
+  @media(max-width:640px){.search-bar{flex-direction:column;align-items:stretch;}.search-bar input,.search-bar select,.search-bar button,.search-row select{width:100%;}.search-row{flex-direction:column;}}
+  @media(max-width:860px){.search-sticky{position:sticky;top:0;z-index:40;background:var(--ivory-dim);padding:10px 0;}}
+
+  .result-count{font-size:.85rem;color:#6b584d;margin-bottom:16px;}
+
+  /* ---------- Status Badges ---------- */
+  .status-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:500;letter-spacing:.02em;}
+  .status-pending{background:#f39c12;color:white;}
+  .status-progress{background:#3498db;color:white;}
+  .status-ready{background:var(--emerald);color:white;}
+  .status-delivered{background:#95a5a6;color:white;}
+
+  /* ---------- Customer Cards ---------- */
+  .customer-cards{display:flex;flex-direction:column;gap:12px;}
+  .customer-card{
+    background:white;border-radius:8px;padding:18px 20px;cursor:pointer;
+    transition:all .2s var(--ease);border:2px solid transparent;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;
+    border-left:4px solid var(--gold);
+  }
+  .customer-card:hover{box-shadow:0 4px 15px rgba(0,0,0,.12);transform:translateY(-1px);}
+  .customer-card.border-pending{border-left-color:#f39c12;}
+  .customer-card.border-progress{border-left-color:#3498db;}
+  .customer-card.border-ready{border-left-color:var(--emerald);}
+  .customer-card.border-delivered{border-left-color:#95a5a6;}
+  .card-left{display:flex;align-items:center;gap:14px;flex:1;min-width:200px;}
+  .card-avatar{
+    width:44px;height:44px;border-radius:50%;background:var(--wine);color:var(--gold-light);
+    display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;
+    font-size:1.1rem;font-weight:600;flex-shrink:0;text-transform:uppercase;
+  }
+  .card-main{flex:1;}
+  .card-name{font-size:1.15rem;font-weight:600;color:var(--wine);margin-bottom:4px;font-family:'Fraunces',serif;}
+  .card-meta{display:flex;gap:15px;flex-wrap:wrap;font-size:.85rem;color:#7f8c8d;}
+  .card-meta span{display:flex;align-items:center;gap:4px;}
+  .card-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+  .card-date{font-size:.8rem;color:#95a5a6;}
+  .card-actions{display:flex;gap:6px;align-items:center;}
+  .card-action-btn{
+    width:32px;height:32px;border-radius:6px;border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:.95rem;
+    transition:all .2s;
+  }
+  .card-action-btn:hover{transform:scale(1.1);}
+  .card-action-wa{background:#25d366;color:white;}
+  .card-action-edit{background:#2980b9;color:white;}
+  .card-status-select{
+    padding:4px 10px;border:1px solid var(--ivory-dim);border-radius:20px;
+    font-size:.78rem;font-family:'Jost',sans-serif;cursor:pointer;background:white;
+    color:var(--wine);outline:none;
+  }
+  .card-status-select:focus{border-color:var(--gold);}
+  @media(max-width:640px){.card-right{align-items:flex-start;width:100%;}.customer-card{padding:15px;}.card-avatar{width:38px;height:38px;font-size:.95rem;}}
+
+  /* ---------- Empty State ---------- */
+  .empty-state{text-align:center;padding:60px 20px;color:#999;}
+  .empty-state-icon{font-size:3.5rem;display:block;margin-bottom:15px;color:#bdc3c7;}
+  .empty-state-text{font-size:1.1rem;font-style:italic;}
+  .empty-state-sub{font-size:.9rem;color:#bdc3c7;margin-top:8px;}
+  .empty-state-btn{margin-top:18px;background:var(--wine);color:var(--ivory);border:none;padding:12px 28px;border-radius:4px;font-size:.9rem;cursor:pointer;font-family:'Jost',sans-serif;transition:background .25s;}
+  .empty-state-btn:hover{background:var(--gold);color:var(--wine-deep);}
+
+  /* ---------- Detail Modal ---------- */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;justify-content:center;align-items:flex-start;padding:30px 20px;overflow-y:auto;}
+  .modal-overlay.show{display:flex;}
+  .modal-content{background:white;border-radius:8px;max-width:600px;width:100%;margin:auto;box-shadow:0 16px 50px rgba(0,0,0,.35);animation:rise .3s var(--ease);overflow:hidden;}
+  .modal-header{background:linear-gradient(90deg,var(--wine) 0%,var(--wine-deep) 100%);color:white;padding:20px 25px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--gold);}
+  .modal-header h3{color:white;margin:0;font-size:1.3rem;font-family:'Fraunces',serif;}
+  .modal-close{background:none;border:none;color:white;font-size:1.8rem;cursor:pointer;padding:0;line-height:1;opacity:.7;transition:opacity .2s;}
+  .modal-close:hover{opacity:1;}
+  .modal-body{padding:25px;}
+  .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:20px;}
+  @media(max-width:640px){.detail-grid{grid-template-columns:1fr;}}
+  .detail-item{background:var(--ivory);padding:12px 15px;border-radius:4px;border-left:3px solid var(--gold);}
+  .detail-label{font-size:.75rem;text-transform:uppercase;color:#95a5a6;letter-spacing:.5px;margin-bottom:3px;}
+  .detail-value{font-size:1rem;font-weight:600;color:var(--wine);}
+  .detail-section-title{font-size:1.1rem;color:var(--wine);margin:20px 0 10px;padding-bottom:8px;border-bottom:2px solid var(--ivory-dim);font-family:'Fraunces',serif;}
+  .detail-measurements{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  @media(max-width:640px){.detail-measurements{grid-template-columns:1fr;}}
+  .measurement-pill{background:var(--ivory-dim);padding:8px 14px;border-radius:20px;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;}
+  .pill-name{color:#7f8c8d;}
+  .pill-value{font-weight:600;color:var(--wine);background:white;padding:2px 10px;border-radius:12px;}
+  .detail-notes{background:#fffde7;padding:12px 15px;border-radius:4px;border-left:3px solid var(--coral);font-size:.95rem;color:#555;line-height:1.5;}
+  .modal-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;padding-top:20px;border-top:2px solid var(--ivory-dim);}
+  @media(max-width:640px){.modal-actions{flex-direction:column;}.btn-modal{width:100%;justify-content:center;}}
+  .btn-modal{padding:10px 18px;border:none;border-radius:2px;cursor:pointer;font-weight:500;font-size:14px;color:white;transition:opacity .2s;display:flex;align-items:center;gap:5px;font-family:'Jost',sans-serif;}
+  .btn-modal:hover{opacity:.85;}
+  .btn-modal-edit{background:#2980b9;}
+  .btn-modal-print{background:#8e44ad;}
+  .btn-modal-delete{background:#e74c3c;}
+  .btn-modal-whatsapp{background:#25d366;}
+
+  /* ---------- Toast ---------- */
+  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--emerald);color:white;padding:14px 28px;border-radius:4px;font-weight:500;font-size:15px;box-shadow:0 4px 15px rgba(0,0,0,.2);z-index:3000;opacity:0;transition:all .3s var(--ease);pointer-events:none;font-family:'Jost',sans-serif;}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+  /* ---------- Print ---------- */
+  @media print{
+    body *{visibility:hidden;}
+    #print-area,#print-area *{visibility:visible;}
+    #print-area{position:absolute;left:0;top:0;width:100%;padding:40px;}
+    .print-header{text-align:center;margin-bottom:30px;}
+    .print-header h1{font-family:'Fraunces',serif;color:var(--wine);font-size:1.8rem;}
+    .print-header p{color:#6b584d;font-size:.9rem;}
+    .print-customer-info{margin-bottom:25px;}
+    .print-customer-info p{margin:4px 0;font-size:.95rem;}
+    .print-measurements{width:100%;border-collapse:collapse;margin-top:10px;}
+    .print-measurements th,.print-measurements td{border:1px solid #ddd;padding:8px 12px;text-align:left;font-size:.9rem;}
+    .print-measurements th{background:var(--wine);color:white;}
+    .print-footer{margin-top:40px;text-align:center;font-size:.8rem;color:#999;border-top:1px solid #ddd;padding-top:10px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE LOADER ============ -->
+<div class="page-loader" id="page-loader">
+  <div class="loader-mark">Dabubu <em>Signature</em></div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- ============ MOBILE NAV ============ -->
+<div class="nav-overlay" id="nav-overlay" onclick="closeMobileNav()"></div>
+<aside class="nav-mobile" id="nav-mobile">
+  <button class="nav-mobile-close" onclick="closeMobileNav()">&times;</button>
+  <a href="#about" onclick="closeMobileNav()">Atelier</a>
+  <a href="#services" onclick="closeMobileNav()">Services</a>
+  <a href="#lookbook" onclick="closeMobileNav()">Lookbook</a>
+  <a href="#process" onclick="closeMobileNav()">Process</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  <a href="#contact" onclick="closeMobileNav()" style="color:var(--gold-light);margin-top:12px;">Book a Fitting</a>
+  <button class="nav-staff-btn" onclick="closeMobileNav();showLogin()" style="margin-top:12px;justify-content:center;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    Staff Login
+  </button>
+</aside>
+
+<!-- ============ LANDING PAGE ============ -->
+<nav class="nav" id="nav">
+  <a href="#top" class="mark">Dabubu <em>Signature</em></a>
+  <ul>
+    <li><a href="#about" data-section="about">Atelier</a></li>
+    <li><a href="#services" data-section="services">Services</a></li>
+    <li><a href="#lookbook" data-section="lookbook">Lookbook</a></li>
+    <li><a href="#process" data-section="process">Process</a></li>
+    <li><a href="#contact" data-section="contact">Contact</a></li>
+  </ul>
+  <div class="nav-staff">
+    <a class="cta-small" href="#contact">Book a Fitting</a>
+    <button class="nav-staff-btn" onclick="showLogin()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Staff
+    </button>
+    <button class="nav-toggle" onclick="openMobileNav()">&#9776;</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-img" id="hero-img"></div>
+  <div class="hero-veil"></div>
+  <div class="hero-content">
+    <span class="eyebrow">Lagos · Bespoke Occasion Wear</span>
+    <h1>Every stitch, cut <i>for you</i> alone.</h1>
+    <p>Dabubu Signature is a made-to-measure tailoring and fashion house — aso-ebi, aso-oke, gele, beadwork and matching family sets, cut and finished by hand for the moments you'll wear again and again in photographs.</p>
+    <div class="btn-row">
+      <a href="#contact" class="btn btn-gold">Start Your Order</a>
+      <a href="#lookbook" class="btn btn-ghost">View the Lookbook</a>
+    </div>
+  </div>
+  <svg class="hero-stitch stitch dark" viewBox="0 0 1200 14" preserveAspectRatio="none"><path d="M0,7 L1200,7"/></svg>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow">The House</span>
+    <h2 class="reveal">Tailoring is our <i>language</i> — fit is how we speak it</h2>
+    <p class="reveal">From owambe gowns to matching mother-and-son sets, every piece leaving the workroom is drafted to your own measurements, not a size chart. We work in aso-oke, lace, ankara and hand-beaded fabric, pairing traditional Nigerian craftsmanship with a modern, editorial finish.</p>
+    <svg class="intro-stitch stitch" viewBox="0 0 220 14" preserveAspectRatio="none"><path d="M0,7 L220,7"/></svg>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="services-head reveal">
+      <h2>What we put on the table</h2>
+      <p>Four ways to work with the atelier — each fitted, finished and delivered by hand.</p>
+    </div>
+  </div>
+  <div class="service-grid">
+    <div class="service-card reveal"><span class="service-num">01</span><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></div><h3>Aso-Ebi &amp; Occasion Wear</h3><p>Statement gowns and fitted silhouettes for weddings, owambe and social events, built around your gele and accessories.</p></div>
+    <div class="service-card reveal"><span class="service-num">02</span><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L12 22"/><path d="M3 7Q12 4 21 7"/><path d="M3 7Q12 10 21 7"/><path d="M3 12Q12 9 21 12"/><path d="M3 12Q12 15 21 12"/><path d="M3 17Q12 14 21 17"/><path d="M3 17Q12 20 21 17"/></svg></div><h3>Aso-Oke &amp; Beadwork</h3><p>Hand-beaded bodices and traditional aso-oke wraps, finished with the detailing of a couture house.</p></div>
+    <div class="service-card reveal"><span class="service-num">03</span><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L12 21"/><path d="M8 21L16 21"/><path d="M12 3C12 3 8 7 8 11C8 13 10 15 12 15C14 15 16 13 16 11C16 7 12 3 12 3Z"/></svg></div><h3>Mother &amp; Child Matching Sets</h3><p>Coordinated outfits for you and your little one — from coral-bead traditional wear to clean tailored whites.</p></div>
+    <div class="service-card reveal"><span class="service-num">04</span><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9L21 9"/><path d="M9 21L9 9"/></svg></div><h3>Everyday &amp; Chic Tailoring</h3><p>Structured separates and ankara pieces for the days between events — sharp, comfortable, unmistakably yours.</p></div>
+  </div>
+</section>
+
+<section class="gallery" id="lookbook">
+  <div class="wrap">
+    <div class="gallery-head reveal"><span class="eyebrow">Lookbook</span><h2>Recent work from the atelier</h2></div>
+    <div class="masonry" id="masonry"></div>
+    <div class="gallery-more-wrap">
+      <button class="gallery-more-btn" id="gallery-more-btn" onclick="toggleGalleryMore()">
+        <span id="gallery-more-text">Show More</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="process-head reveal"><span class="eyebrow">How an Order Runs</span><h2>From first sketch to final fitting</h2></div>
+    <div class="process-list">
+      <div class="process-step reveal"><span class="pnum">1</span><h3>Consultation</h3><p>Send your event date, fabric and inspiration photos on WhatsApp — we sketch a look around it.</p></div>
+      <div class="process-step reveal"><span class="pnum">2</span><h3>Measurements</h3><p>In-studio or guided self-measurement for clients outside Lagos, recorded to your personal file.</p></div>
+      <div class="process-step reveal"><span class="pnum">3</span><h3>Cut &amp; Construct</h3><p>Your piece is drafted, cut and hand-finished, with a fitting scheduled midway for gowns and sets.</p></div>
+      <div class="process-step reveal"><span class="pnum">4</span><h3>Delivery</h3><p>Final press, packaging and delivery — timed so it's ready well ahead of your event date.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap trust-grid">
+    <div class="reveal"><div class="trust-num">400+</div><div class="trust-label">Pieces Delivered</div></div>
+    <div class="reveal"><div class="trust-num">100%</div><div class="trust-label">Made-to-Measure</div></div>
+    <div class="reveal"><div class="trust-num">7+ yrs</div><div class="trust-label">In the Craft</div></div>
+    <div class="reveal"><div class="trust-num">Lagos</div><div class="trust-label">& Nationwide Delivery</div></div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-img reveal" id="about-img"></div>
+  <div class="about-copy">
+    <span class="eyebrow">The Atelier</span>
+    <h2 class="reveal">Built by hand, worn with confidence</h2>
+    <p class="reveal">Dabubu Signature started with a single sewing machine and a promise: clothes should fit the person, not the other way round. Today the atelier dresses clients for weddings, owambe, church and everyday occasions — every piece still passing through the same hands that started it all.</p>
+    <p class="reveal">Whatever the fabric — aso-oke, lace, ankara or bead — we treat each order as a one-of-one.</p>
+    <a href="#contact" class="btn btn-gold reveal">Book a Consultation</a>
+    <div class="about-stats reveal">
+      <div><div class="about-stat-num">7+</div><div class="about-stat-label">Years in Craft</div></div>
+      <div><div class="about-stat-num">400+</div><div class="about-stat-label">Pieces Delivered</div></div>
+      <div><div class="about-stat-num">100%</div><div class="about-stat-label">Handmade</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="faq-head reveal"><span class="eyebrow">Good to Know</span><h2>Frequently asked questions</h2></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How long does an order take?<span class="faq-icon"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Most pieces take 2-3 weeks from measurement to delivery. Rush orders (within one week) are available on request and may carry an additional fee. We always agree on a deadline before starting.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Do you deliver outside Lagos?<span class="faq-icon"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. We deliver nationwide via trusted couriers. For clients outside Lagos, we'll guide you through self-measurement over WhatsApp and send photos before shipping.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I bring my own fabric?<span class="faq-icon"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. You can bring your own aso-oke, lace, ankara or any fabric of choice. We also source specific fabrics on request — just tell us what you're looking for.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How do I get measured if I'm not in Lagos?<span class="faq-icon"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">We'll send you a simple step-by-step measurement guide over WhatsApp. You'll need a soft tape measure and a friend to help — it takes about 10 minutes. We also schedule a video call if needed.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What's the pricing range?<span class="faq-icon"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Pricing depends on fabric, complexity and detailing. Simple ankara pieces start lower, while hand-beaded aso-oke gowns are at a premium. Send us your event details on WhatsApp for an exact quote.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap cta-inner">
+    <span class="eyebrow">Let's Get You Measured</span>
+    <h2 class="reveal">Your next occasion deserves a fit this exact.</h2>
+    <p class="reveal">Message us your event date and fabric — we'll reply with a quote and timeline the same day.</p>
+    <div class="btn-row">
+      <a href="https://wa.me/2348065289221?text=Hi%20Dabubu%20Signature%2C%20I%27d%20like%20to%20book%20a%20fitting" class="btn btn-whatsapp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </a>
+      <a href="mailto:dabubusignature50@gmail.com" class="btn btn-ghost">Email the Atelier</a>
+    </div>
+    <!-- Quick booking form -->
+    <form class="booking-form reveal" id="booking-form" onsubmit="submitBooking(event)">
+      <h3>Quick Booking</h3>
+      <p class="booking-sub">Fill in your details — we'll send a quote on WhatsApp instantly.</p>
+      <div class="booking-row">
+        <div>
+          <label for="bk-name">Your Name</label>
+          <input type="text" id="bk-name" placeholder="e.g. Tola Adeyemi" required>
+        </div>
+        <div>
+          <label for="bk-phone">Phone / WhatsApp</label>
+          <input type="tel" id="bk-phone" placeholder="e.g. 0806 123 4567" required>
+        </div>
+      </div>
+      <div class="booking-row">
+        <div>
+          <label for="bk-date">Event Date</label>
+          <input type="date" id="bk-date">
+        </div>
+        <div>
+          <label for="bk-type">Outfit Type</label>
+          <select id="bk-type">
+            <option value="">Select...</option>
+            <option>Aso-Ebi / Occasion Wear</option>
+            <option>Aso-Oke & Beadwork</option>
+            <option>Mother & Child Matching Set</option>
+            <option>Everyday / Chic Tailoring</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <label for="bk-fabric">Fabric / Details (optional)</label>
+        <input type="text" id="bk-fabric" placeholder="e.g. Aso-oke, lace, ankara, colour preferences">
+      </div>
+      <button type="submit" class="btn btn-whatsapp booking-submit">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Send via WhatsApp
+      </button>
+      <p class="booking-note">No payment needed — just a quick message and we'll take it from there.</p>
+    </form>
+    <div class="footer-grid">
+      <div>
+        <div class="mark">Dabubu <em>Signature</em></div>
+        <p>A bespoke tailoring &amp; fashion house in Lagos, Nigeria — occasion wear, aso-oke and matching family sets, cut to measure.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#about">The Atelier</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#lookbook">Lookbook</a></li>
+          <li><a href="#process">Process</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/2348065289221">+234 806 528 9221</a></li>
+          <li><a href="mailto:dabubusignature50@gmail.com">dabubusignature50@gmail.com</a></li>
+          <li><a href="#">Lagos, Nigeria</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="https://www.facebook.com/share/1MJfJ62JQo/" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://vt.tiktok.com/ZSCos4eUP/" target="_blank" rel="noopener">TikTok</a></li>
+        </ul>
+        <div class="footer-socials">
+          <a href="https://wa.me/2348065289221" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          <a href="https://www.facebook.com/share/1MJfJ62JQo/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073"/></svg></a>
+          <a href="https://vt.tiktok.com/ZSCos4eUP/" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.87-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.06 6.15-1.65.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; <span id="year"></span> Dabubu Signature. All rights reserved.</span>
+    <span class="admin-link" onclick="showLogin()">Staff Login</span>
+  </div>
+</section>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">&#8249;</button>
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">&#8250;</button>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<!-- ============ FLOATING WHATSAPP ============ -->
+<a href="https://wa.me/2348065289221?text=Hi%20Dabubu%20Signature%2C%20I%27d%20like%20to%20enquire" class="float-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="float-wa-badge"></span>
+</a>
+
+<!-- ============ BACK TO TOP ============ -->
+<button class="back-top" id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<!-- ============ ADMIN LOGIN ============ -->
+<div id="admin-login" class="admin-screen">
+  <div class="login-card">
+    <div class="mark">Dabubu <em>Signature</em></div>
+    <span class="login-icon">&#9925;</span>
+    <span class="eyebrow">Admin Access</span>
+    <form id="login-form">
+      <input type="email" id="admin-email" placeholder="Admin email" autocomplete="email" required style="margin-bottom:12px;">
+      <input type="password" id="admin-password" placeholder="Password" autocomplete="current-password" required>
+      <button type="submit" class="btn btn-gold">Sign In</button>
+      <button type="button" class="btn-text" onclick="hideLogin()">Back to Site</button>
+      <p id="login-error"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ============ ADMIN DASHBOARD ============ -->
+<div id="admin-dashboard" class="admin-screen">
+  <!-- Mobile toggle -->
+  <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">&#9776;</button>
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="sidebar-header">
+      <div class="mark">Dabubu <em>Signature</em></div>
+      <div class="sidebar-sub">Admin Panel</div>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-item active" id="tab-btn-dashboard" onclick="showTab('dashboard')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </button>
+      <button class="sidebar-item" id="tab-btn-measurements" onclick="showTab('measurements')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        Add Customer
+      </button>
+      <button class="sidebar-item" id="tab-btn-customers" onclick="showTab('customers')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Customers <span class="sidebar-badge" id="nav-badge">0</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-item" onclick="backToSite()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        View Site
+      </button>
+      <button class="sidebar-item" onclick="logout()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Content Area -->
+  <div class="admin-content">
+
+  <!-- Tab: Dashboard -->
+  <div id="tab-dashboard" class="admin-tab show">
+    <div class="content-header">
+      <h2>Dashboard</h2>
+      <p class="tab-sub">Overview of your customer records and job statuses.</p>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-card stat-total"><span class="stat-icon">&#128100;</span><span class="stat-number" id="stat-total">0</span><span class="stat-label">Total</span></div>
+      <div class="stat-card stat-pending"><span class="stat-icon">&#9203;</span><span class="stat-number" id="stat-pending">0</span><span class="stat-label">Pending</span></div>
+      <div class="stat-card stat-progress"><span class="stat-icon">&#9874;</span><span class="stat-number" id="stat-progress">0</span><span class="stat-label">In Progress</span></div>
+      <div class="stat-card stat-ready"><span class="stat-icon">&#9989;</span><span class="stat-number" id="stat-ready">0</span><span class="stat-label">Ready</span></div>
+    </div>
+    <div class="dashboard-quick-actions">
+      <h3>Quick Actions</h3>
+      <div class="dashboard-action-grid">
+        <button class="dashboard-action-card" onclick="showTab('measurements')">
+          <span class="dashboard-action-icon">&#10133;</span>
+          <span class="dashboard-action-title">Add New Customer</span>
+          <span class="dashboard-action-desc">Submit a new measurement form</span>
+        </button>
+        <button class="dashboard-action-card" onclick="showTab('customers')">
+          <span class="dashboard-action-icon">&#128269;</span>
+          <span class="dashboard-action-title">View All Customers</span>
+          <span class="dashboard-action-desc">Search, filter & manage records</span>
+        </button>
+        <button class="dashboard-action-card" onclick="exportCSV()">
+          <span class="dashboard-action-icon">&#128202;</span>
+          <span class="dashboard-action-title">Export CSV</span>
+          <span class="dashboard-action-desc">Download all customer data</span>
+        </button>
+      </div>
+    </div>
+    <div class="dashboard-status-breakdown">
+      <h3>Status Breakdown</h3>
+      <div class="status-tabs" id="dashboard-status-tabs" style="margin-bottom:0;">
+        <button class="status-tab active" onclick="showTab('customers')">All <span class="tab-count" id="count-all">0</span></button>
+        <button class="status-tab" onclick="setStatusTabFromDashboard(this,'Pending')">Pending <span class="tab-count" id="count-pending">0</span></button>
+        <button class="status-tab" onclick="setStatusTabFromDashboard(this,'In Progress')">In Progress <span class="tab-count" id="count-progress">0</span></button>
+        <button class="status-tab" onclick="setStatusTabFromDashboard(this,'Ready')">Ready <span class="tab-count" id="count-ready">0</span></button>
+        <button class="status-tab" onclick="setStatusTabFromDashboard(this,'Delivered')">Delivered <span class="tab-count" id="count-delivered">0</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab: Submit Measurements -->
+  <div id="tab-measurements" class="admin-tab">
+    <div class="content-header">
+      <h2>Customer Measurement Form</h2>
+      <p class="tab-sub">Fill out the details below. You can add any custom measurements you need.</p>
+    </div>
+    <div class="form-card">
+      <form id="measurement-form">
+        <div class="edit-banner" id="edit-banner">
+          <span>Editing existing customer — changes will overwrite the original record.</span>
+          <button type="button" class="btn-cancel-edit" onclick="cancelEdit()">Cancel Edit</button>
+        </div>
+        <h3>Customer Details</h3>
+        <div class="customer-grid">
+          <div>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" required oninput="validateField(this)">
+            <div class="field-hint" id="hint-name">Please enter a name.</div>
+          </div>
+          <div>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" required oninput="validateField(this)" onblur="checkDuplicatePhone()">
+            <div class="field-hint" id="hint-phone">Please enter a phone number.</div>
+            <div class="field-hint" id="hint-duplicate" style="color:var(--coral);">This phone number may already be saved.</div>
+          </div>
+          <div>
+            <label for="location">Location:</label>
+            <input type="text" id="location" placeholder="e.g. Lekki, Lagos">
+          </div>
+        </div>
+        <div class="customer-grid" style="margin-top:15px;">
+          <div>
+            <label for="garment">Garment Type:</label>
+            <input type="text" id="garment" list="garment-options" placeholder="Type or select..." required oninput="validateField(this)" onchange="applyMeasurementPresets()">
+            <datalist id="garment-options">
+              <option value="Suit"><option value="Dress"><option value="Trouser"><option value="Shirt"><option value="Traditional"><option value="Alteration"><option value="Aso-Ebi"><option value="Aso-Oke"><option value="Gele"><option value="Agbada">
+            </datalist>
+          </div>
+          <div>
+            <label for="status">Job Status:</label>
+            <select id="status">
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Ready">Ready</option>
+              <option value="Delivered">Delivered</option>
+            </select>
+          </div>
+          <div></div>
+        </div>
+        <h3 style="margin-top:24px;">Measurements</h3>
+        <div id="dynamic-measurements"></div>
+        <button type="button" class="btn-add" onclick="addMeasurementField()">+ Add Custom Measurement</button>
+        <div style="margin-top:20px;">
+          <label for="notes" style="display:block;font-size:.82rem;color:#6b584d;margin-bottom:6px;">Additional Notes:</label>
+          <textarea id="notes" rows="3" placeholder="E.g., Make the sleeves a bit looser..."></textarea>
+        </div>
+        <br><br>
+        <button type="submit" class="btn-save">Save Customer Details</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tab: View Customers -->
+  <div id="tab-customers" class="admin-tab">
+    <div class="content-header">
+      <h2>Customers</h2>
+      <p class="tab-sub">Search, view, and manage all saved customers.</p>
+    </div>
+    <div class="status-tabs" id="status-tabs">
+      <button class="status-tab active" onclick="setStatusTab(this,'')">All <span class="tab-count" id="cust-count-all">0</span></button>
+      <button class="status-tab" onclick="setStatusTab(this,'Pending')">Pending <span class="tab-count" id="cust-count-pending">0</span></button>
+      <button class="status-tab" onclick="setStatusTab(this,'In Progress')">In Progress <span class="tab-count" id="cust-count-progress">0</span></button>
+      <button class="status-tab" onclick="setStatusTab(this,'Ready')">Ready <span class="tab-count" id="cust-count-ready">0</span></button>
+      <button class="status-tab" onclick="setStatusTab(this,'Delivered')">Delivered <span class="tab-count" id="cust-count-delivered">0</span></button>
+    </div>
+    <div class="search-sticky">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search name, phone, garment, location, measurements..." oninput="filterCustomers()">
+        <div class="search-row">
+          <select id="search-garment-filter" onchange="filterCustomers()">
+            <option value="">All Garments</option>
+            <option value="Suit">Suit</option><option value="Dress">Dress</option><option value="Trouser">Trouser</option><option value="Shirt">Shirt</option><option value="Traditional">Traditional</option><option value="Alteration">Alteration</option><option value="Aso-Ebi">Aso-Ebi</option><option value="Aso-Oke">Aso-Oke</option><option value="Gele">Gele</option><option value="Agbada">Agbada</option>
+          </select>
+          <select id="sort-select" onchange="sortByDropdown()">
+            <option value="">Newest first</option>
+            <option value="name-asc">Name (A-Z)</option><option value="name-desc">Name (Z-A)</option>
+            <option value="date-asc">Date (oldest)</option><option value="date-desc">Date (newest)</option>
+            <option value="status-asc">Status (A-Z)</option><option value="status-desc">Status (Z-A)</option>
+          </select>
+          <button class="btn-clear" onclick="clearSearch()">Clear</button>
+          <button class="btn-export" onclick="exportCSV()">Export CSV</button>
+        </div>
+      </div>
+      <button class="more-filters-toggle" onclick="toggleMoreFilters()">+ More filters</button>
+      <div class="more-filters" id="more-filters">
+        <input type="date" id="search-date-filter" onchange="filterCustomers()" title="Filter by date">
+        <button class="btn-clear" onclick="document.getElementById('search-date-filter').value='';filterCustomers()">Clear date</button>
+      </div>
+    </div>
+    <div id="result-count" class="result-count"></div>
+    <div id="customer-cards" class="customer-cards"></div>
+  </div>
+
+  </div><!-- /admin-content -->
+</div>
+
+<!-- ============ DETAIL MODAL ============ -->
+<div class="modal-overlay" id="detail-modal" onclick="if(event.target===this)closeDetail()">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modal-title">Customer Details</h3>
+      <button class="modal-close" onclick="closeDetail()">&times;</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ============ TOAST + PRINT ============ -->
+<div class="toast" id="toast"></div>
+<div id="print-area" style="display:none;"></div>
+
+<script>
+/* ============================================================
+   AUTH SYSTEM (Firebase)
+   ============================================================ */
+var dbCustomers = [];
+var customersLoaded = false;
+
+function showLogin() {
+  document.getElementById('admin-login').classList.add('show');
+  document.getElementById('admin-email').focus();
+  document.querySelector('.float-wa').style.display = 'none';
+  document.getElementById('back-top').style.display = 'none';
+}
+function hideLogin() {
+  document.getElementById('admin-login').classList.remove('show');
+  document.getElementById('login-error').innerText = '';
+  document.getElementById('admin-email').value = '';
+  document.getElementById('admin-password').value = '';
+  document.querySelector('.float-wa').style.display = '';
+  document.getElementById('back-top').style.display = '';
+}
+function showDashboard() {
+  document.getElementById('admin-login').classList.remove('show');
+  document.getElementById('admin-dashboard').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  document.querySelector('.float-wa').style.display = 'none';
+  document.getElementById('back-top').style.display = 'none';
+  closeSidebar();
+  showTab('dashboard');
+  loadCustomersFromFirestore().then(function() {
+    updateStats();
+    updateNavBadge();
+    renderCustomerCards();
+  });
+}
+function backToSite() {
+  document.getElementById('admin-dashboard').classList.remove('show');
+  document.body.style.overflow = '';
+  document.querySelector('.float-wa').style.display = '';
+  document.getElementById('back-top').style.display = '';
+  closeSidebar();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function logout() {
+  auth.signOut();
+  backToSite();
+}
+document.getElementById('login-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var email = document.getElementById('admin-email').value.trim();
+  var pw = document.getElementById('admin-password').value;
+  var errEl = document.getElementById('login-error');
+  errEl.innerText = 'Signing in...';
+  auth.signInWithEmailAndPassword(email, pw).then(function() {
+    errEl.innerText = '';
+  }).catch(function(err) {
+    errEl.innerText = 'Login failed: ' + (err.message || 'check your email and password.');
+  });
+});
+auth.onAuthStateChanged(function(user) {
+  if (user) {
+    showDashboard();
+  } else {
+    document.getElementById('admin-dashboard').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+});
+
+/* ============================================================
+   FIRESTORE DATA LAYER
+   ============================================================ */
+function loadCustomersFromFirestore() {
+  return db.collection('customers').get().then(function(snapshot) {
+    dbCustomers = [];
+    snapshot.forEach(function(doc) {
+      var data = doc.data();
+      data._docId = doc.id;
+      dbCustomers.push(data);
+    });
+    customersLoaded = true;
+    migrateLocalStorageData();
+    return dbCustomers;
+  }).catch(function(err) {
+    console.error('Firestore load error:', err);
+    dbCustomers = JSON.parse(localStorage.getItem('customers')) || [];
+    customersLoaded = true;
+    return dbCustomers;
+  });
+}
+function saveCustomerToFirestore(customer, index) {
+  if (index >= 0 && dbCustomers[index] && dbCustomers[index]._docId) {
+    var docId = dbCustomers[index]._docId;
+    customer._docId = docId;
+    dbCustomers[index] = customer;
+    return db.collection('customers').doc(docId).set(customer).catch(function(err) { console.error('Save error:', err); });
+  } else {
+    return db.collection('customers').add(customer).then(function(docRef) {
+      customer._docId = docRef.id;
+      dbCustomers.push(customer);
+    }).catch(function(err) { console.error('Add error:', err); });
+  }
+}
+function deleteCustomerFromFirestore(index) {
+  if (dbCustomers[index] && dbCustomers[index]._docId) {
+    var docId = dbCustomers[index]._docId;
+    return db.collection('customers').doc(docId).delete().catch(function(err) { console.error('Delete error:', err); });
+  }
+}
+function migrateLocalStorageData() {
+  var local = JSON.parse(localStorage.getItem('customers')) || [];
+  if (local.length === 0) return;
+  var existingPhones = dbCustomers.map(function(c) { return c.phone; });
+  var toMigrate = local.filter(function(c) { return existingPhones.indexOf(c.phone) === -1; });
+  if (toMigrate.length === 0) { localStorage.removeItem('customers'); return; }
+  toMigrate.forEach(function(customer) {
+    db.collection('customers').add(customer).then(function(docRef) {
+      customer._docId = docRef.id;
+      dbCustomers.push(customer);
+      updateStats(); updateNavBadge(); renderCustomerCards();
+    });
+  });
+  localStorage.removeItem('customers');
+  showToast(toMigrate.length + ' customer(s) migrated to cloud storage.');
+}
+
+/* ============================================================
+   TAB SWITCHING
+   ============================================================ */
+function showTab(tab) {
+  document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.remove('show'); });
+  document.querySelectorAll('.sidebar-item').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('tab-' + tab).classList.add('show');
+  document.getElementById('tab-btn-' + tab).classList.add('active');
+  if (tab === 'customers') { updateStats(); renderCustomerCards(); }
+  closeSidebar();
+  document.querySelector('.admin-content').scrollTop = 0;
+}
+function toggleSidebar() {
+  var sb = document.getElementById('admin-sidebar');
+  var overlay = document.getElementById('sidebar-overlay');
+  var toggle = document.getElementById('sidebar-toggle');
+  sb.classList.toggle('open');
+  overlay.classList.toggle('show');
+  if (sb.classList.contains('open')) { toggle.classList.add('hidden'); }
+  else { toggle.classList.remove('hidden'); }
+}
+function closeSidebar() {
+  document.getElementById('admin-sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('show');
+  document.getElementById('sidebar-toggle').classList.remove('hidden');
+}
+
+/* ============================================================
+   LANDING PAGE JS
+   ============================================================ */
+document.getElementById('year').textContent = new Date().getFullYear();
+var nav = document.getElementById('nav');
+var backTop = document.getElementById('back-top');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+  backTop.classList.toggle('show', window.scrollY > 500);
+  updateActiveNav();
+});
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+
+/* Gallery images — photos from the atelier */
+var galleryImages = [
+  ['lookbook-1.jpg', 'Bespoke Occasion Wear'],
+  ['lookbook-2.jpg', 'Made to Measure'],
+  ['lookbook-3.jpg', 'Hand-Finished Detail'],
+  ['lookbook-4.jpg', 'Atelier Craftsmanship'],
+  ['lookbook-5.jpg', 'Signature Styles'],
+  ['lookbook-6.jpg', 'Aso-Oke Elegance'],
+  ['lookbook-7.jpg', 'Garden Glamour'],
+  ['lookbook-8.jpg', 'Champagne Couture'],
+  ['lookbook-9.jpg', 'Ankara Statement']
+];
+var GALLERY_INITIAL = 4;
+var galleryExpanded = false;
+var masonry = document.getElementById('masonry');
+galleryImages.forEach(function(item, i) {
+  var fig = document.createElement('figure');
+  fig.className = 'reveal' + (i >= GALLERY_INITIAL ? ' gallery-hidden' : '');
+  fig.innerHTML = '<img src="images/' + item[0] + '" alt="' + item[1] + '" loading="lazy" onerror="this.parentElement.style.display=\'none\'"><figcaption>' + item[1] + '</figcaption>';
+  fig.addEventListener('click', function() { openLightbox(i); });
+  masonry.appendChild(fig);
+  io.observe(fig);
+});
+function toggleGalleryMore() {
+  var btn = document.getElementById('gallery-more-btn');
+  var text = document.getElementById('gallery-more-text');
+  var hiddenFigs = masonry.querySelectorAll('.gallery-hidden');
+  if (!galleryExpanded) {
+    galleryExpanded = true;
+    hiddenFigs.forEach(function(fig, idx) {
+      setTimeout(function() {
+        fig.classList.remove('gallery-hidden');
+        fig.classList.add('gallery-reveal');
+      }, idx * 80);
+    });
+    btn.classList.add('expanded');
+    text.textContent = 'Show Less';
+  } else {
+    galleryExpanded = false;
+    masonry.querySelectorAll('.gallery-reveal').forEach(function(fig) {
+      fig.classList.add('gallery-hidden');
+      fig.classList.remove('gallery-reveal');
+    });
+    btn.classList.remove('expanded');
+    text.textContent = 'Show More';
+    document.getElementById('lookbook').scrollIntoView({ behavior: 'smooth' });
+  }
+}
+/* Hero & about background images */
+var heroImg = document.getElementById('hero-img');
+heroImg.style.backgroundImage = "url('images/lookbook-1.jpg')";
+var aboutImg = document.getElementById('about-img');
+aboutImg.style.backgroundImage = "url('images/lookbook-3.jpg')";
+
+/* ---------- Page loader ---------- */
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var loader = document.getElementById('page-loader');
+    if (loader) loader.classList.add('hide');
+  }, 600);
+});
+
+/* ---------- Mobile nav ---------- */
+function openMobileNav() {
+  document.getElementById('nav-mobile').classList.add('open');
+  document.getElementById('nav-overlay').classList.add('show');
+}
+function closeMobileNav() {
+  document.getElementById('nav-mobile').classList.remove('open');
+  document.getElementById('nav-overlay').classList.remove('show');
+}
+
+/* ---------- Active nav highlight ---------- */
+var navSections = ['about','services','lookbook','process','contact'];
+function updateActiveNav() {
+  var scrollPos = window.scrollY + 120;
+  var current = '';
+  navSections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollPos) current = id;
+  });
+  document.querySelectorAll('.nav ul a').forEach(function(a) {
+    a.classList.toggle('active', a.getAttribute('data-section') === current);
+  });
+}
+
+/* ---------- Lightbox ---------- */
+var currentLightboxIndex = 0;
+function openLightbox(index) {
+  currentLightboxIndex = index;
+  showLightboxImage();
+  document.getElementById('lightbox').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function showLightboxImage() {
+  var item = galleryImages[currentLightboxIndex];
+  document.getElementById('lightbox-img').src = 'images/' + item[0];
+  document.getElementById('lightbox-caption').textContent = item[1];
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('show');
+  document.body.style.overflow = '';
+}
+function lightboxNav(dir) {
+  currentLightboxIndex = (currentLightboxIndex + dir + galleryImages.length) % galleryImages.length;
+  showLightboxImage();
+}
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('lightbox').classList.contains('show')) return;
+  if (e.key === 'Escape') closeLightbox();
+  else if (e.key === 'ArrowLeft') lightboxNav(-1);
+  else if (e.key === 'ArrowRight') lightboxNav(1);
+});
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+
+/* ---------- Quick booking form ---------- */
+function submitBooking(e) {
+  e.preventDefault();
+  var name = document.getElementById('bk-name').value.trim();
+  var phone = document.getElementById('bk-phone').value.trim();
+  var date = document.getElementById('bk-date').value;
+  var type = document.getElementById('bk-type').value;
+  var fabric = document.getElementById('bk-fabric').value.trim();
+  var msg = 'Hi Dabubu Signature, I would like to book a fitting.%0A%0A';
+  msg += 'Name: ' + encodeURIComponent(name) + '%0A';
+  msg += 'Phone: ' + encodeURIComponent(phone) + '%0A';
+  if (date) msg += 'Event Date: ' + encodeURIComponent(date) + '%0A';
+  if (type) msg += 'Outfit Type: ' + encodeURIComponent(type) + '%0A';
+  if (fabric) msg += 'Fabric/Details: ' + encodeURIComponent(fabric) + '%0A';
+  msg += '%0APlease send a quote. Thank you!';
+  window.open('https://wa.me/2348065289221?text=' + msg, '_blank');
+}
+
+/* ---------- FAQ accordion ---------- */
+function toggleFaq(btn) {
+  var item = btn.parentElement;
+  var answer = item.querySelector('.faq-a');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(fi) {
+    fi.classList.remove('open');
+    fi.querySelector('.faq-a').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+/* ---------- Animated stat counters ---------- */
+var statsAnimated = false;
+function animateStats() {
+  if (statsAnimated) return;
+  var statsSection = document.querySelector('.about-stats');
+  if (!statsSection) return;
+  var rect = statsSection.getBoundingClientRect();
+  if (rect.top > window.innerHeight || rect.bottom < 0) return;
+  statsAnimated = true;
+  statsSection.querySelectorAll('.about-stat-num').forEach(function(el) {
+    var text = el.textContent.trim();
+    var num = parseInt(text);
+    var suffix = text.replace(/[\d]/g, '');
+    if (isNaN(num)) return;
+    var current = 0;
+    var step = Math.max(1, Math.ceil(num / 40));
+    var interval = setInterval(function() {
+      current += step;
+      if (current >= num) { current = num; clearInterval(interval); }
+      el.textContent = current + suffix;
+    }, 30);
+  });
+}
+window.addEventListener('scroll', animateStats);
+window.addEventListener('load', animateStats);
+
+/* ============================================================
+   MEASUREMENT FORM
+   ============================================================ */
+var editingIndex = -1;
+var sortColumn = '';
+var sortDirection = 'asc';
+var measurementPresets = {
+  'Suit': ['Chest','Shoulder','Sleeve Length','Waist','Jacket Length','Neck'],
+  'Dress': ['Bust','Waist','Hip','Dress Length','Shoulder','Sleeve Length'],
+  'Trouser': ['Waist','Hip','Trouser Length','Thigh','Knee','Ankle'],
+  'Shirt': ['Chest','Shoulder','Sleeve Length','Neck','Shirt Length','Waist'],
+  'Traditional': ['Chest','Waist','Length','Shoulder','Sleeve Length'],
+  'Alteration': ['Length','Waist','Hem'],
+  'Aso-Ebi': ['Bust','Waist','Hip','Length','Shoulder'],
+  'Aso-Oke': ['Bust','Waist','Hip','Length','Shoulder'],
+  'Agbada': ['Chest','Shoulder','Sleeve Length','Length','Waist'],
+  'Gele': ['Head Circumference']
+};
+
+function validateField(input) {
+  var hintId = 'hint-' + input.id;
+  var hint = document.getElementById(hintId);
+  if (input.value.trim()) { input.classList.add('valid'); input.classList.remove('invalid'); if (hint) hint.classList.remove('show'); }
+  else { input.classList.remove('valid'); input.classList.add('invalid'); if (hint) hint.classList.add('show'); }
+}
+function checkDuplicatePhone() {
+  var phone = document.getElementById('phone').value.trim();
+  var hint = document.getElementById('hint-duplicate');
+  if (!phone || editingIndex >= 0) { hint.classList.remove('show'); return; }
+  if (dbCustomers.some(function(c) { return c.phone === phone; })) hint.classList.add('show');
+  else hint.classList.remove('show');
+}
+function applyMeasurementPresets() {
+  var garment = document.getElementById('garment').value.trim();
+  var presets = measurementPresets[garment];
+  if (!presets) return;
+  var existingRows = document.querySelectorAll('.measurement-row');
+  var hasData = false;
+  existingRows.forEach(function(row) {
+    if (row.querySelector('.m-name').value.trim() || row.querySelector('.m-value').value.trim()) hasData = true;
+  });
+  if (hasData) return;
+  document.getElementById('dynamic-measurements').innerHTML = '';
+  presets.forEach(function(name) { addMeasurementField(name, ''); });
+}
+function addMeasurementField(name, value) {
+  name = name || ''; value = value || '';
+  var container = document.getElementById('dynamic-measurements');
+  var row = document.createElement('div');
+  row.className = 'measurement-row';
+  var nameInput = document.createElement('input');
+  nameInput.type = 'text'; nameInput.className = 'm-name'; nameInput.placeholder = 'Measurement Name'; nameInput.value = name;
+  var valueInput = document.createElement('input');
+  valueInput.type = 'text'; valueInput.className = 'm-value'; valueInput.placeholder = 'Value'; valueInput.value = value;
+  var removeBtn = document.createElement('button');
+  removeBtn.type = 'button'; removeBtn.className = 'btn-remove'; removeBtn.innerText = 'X'; removeBtn.title = 'Remove';
+  removeBtn.onclick = function() { row.remove(); };
+  row.appendChild(nameInput); row.appendChild(valueInput); row.appendChild(removeBtn);
+  container.appendChild(row);
+}
+addMeasurementField();
+
+document.getElementById('measurement-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var nameInput = document.getElementById('name');
+  var phoneInput = document.getElementById('phone');
+  var garmentInput = document.getElementById('garment');
+  var valid = true;
+  if (!nameInput.value.trim()) { nameInput.classList.add('invalid'); document.getElementById('hint-name').classList.add('show'); valid = false; }
+  if (!phoneInput.value.trim()) { phoneInput.classList.add('invalid'); document.getElementById('hint-phone').classList.add('show'); valid = false; }
+  if (!garmentInput.value.trim()) { garmentInput.classList.add('invalid'); valid = false; }
+  if (!valid) return;
+  var customer = {
+    name: nameInput.value.trim(), phone: phoneInput.value.trim(),
+    location: document.getElementById('location').value.trim(),
+    garment: garmentInput.value.trim(), status: document.getElementById('status').value,
+    notes: document.getElementById('notes').value.trim(), measurements: []
+  };
+  document.querySelectorAll('.measurement-row').forEach(function(row) {
+    var mName = row.querySelector('.m-name').value.trim();
+    var mValue = row.querySelector('.m-value').value.trim();
+    if (mName && mValue) customer.measurements.push({ name: mName, value: mValue });
+  });
+  if (editingIndex >= 0) { customer.date = dbCustomers[editingIndex].date || new Date().toISOString().split('T')[0]; saveCustomerToFirestore(customer, editingIndex); showToast('Customer details updated successfully!'); }
+  else { customer.date = new Date().toISOString().split('T')[0]; saveCustomerToFirestore(customer, -1); showToast('Measurements saved successfully!'); }
+  updateNavBadge(); updateStats();
+  this.reset();
+  document.getElementById('dynamic-measurements').innerHTML = '';
+  addMeasurementField();
+  cancelEdit();
+});
+
+function editCustomer(index) {
+  var c = dbCustomers[index];
+  if (!c) return;
+  editingIndex = index;
+  document.getElementById('name').value = c.name || '';
+  document.getElementById('phone').value = c.phone || '';
+  document.getElementById('location').value = c.location || '';
+  document.getElementById('garment').value = c.garment || '';
+  document.getElementById('status').value = c.status || 'Pending';
+  document.getElementById('notes').value = c.notes || '';
+  document.getElementById('dynamic-measurements').innerHTML = '';
+  if (c.measurements && c.measurements.length > 0) c.measurements.forEach(function(m) { addMeasurementField(m.name, m.value); });
+  else addMeasurementField();
+  document.getElementById('edit-banner').classList.add('show');
+  closeDetail();
+  showTab('measurements');
+  document.getElementById('tab-measurements').scrollIntoView({ behavior: 'smooth' });
+}
+function cancelEdit() { editingIndex = -1; document.getElementById('edit-banner').classList.remove('show'); }
+
+/* ============================================================
+   DASHBOARD STATS
+   ============================================================ */
+function updateStats() {
+  var total = dbCustomers.length, pending = 0, progress = 0, ready = 0, delivered = 0;
+  dbCustomers.forEach(function(c) {
+    var s = c.status || 'Pending';
+    if (s === 'Pending') pending++; else if (s === 'In Progress') progress++; else if (s === 'Ready') ready++; else if (s === 'Delivered') delivered++;
+  });
+  document.getElementById('stat-total').innerText = total;
+  document.getElementById('stat-pending').innerText = pending;
+  document.getElementById('stat-progress').innerText = progress;
+  document.getElementById('stat-ready').innerText = ready;
+  var el;
+  if ((el = document.getElementById('count-all'))) el.innerText = total;
+  if ((el = document.getElementById('count-pending'))) el.innerText = pending;
+  if ((el = document.getElementById('count-progress'))) el.innerText = progress;
+  if ((el = document.getElementById('count-ready'))) el.innerText = ready;
+  if ((el = document.getElementById('count-delivered'))) el.innerText = delivered;
+  if ((el = document.getElementById('cust-count-all'))) el.innerText = total;
+  if ((el = document.getElementById('cust-count-pending'))) el.innerText = pending;
+  if ((el = document.getElementById('cust-count-progress'))) el.innerText = progress;
+  if ((el = document.getElementById('cust-count-ready'))) el.innerText = ready;
+  if ((el = document.getElementById('cust-count-delivered'))) el.innerText = delivered;
+}
+function updateNavBadge() {
+  var badge = document.getElementById('nav-badge');
+  if (badge) badge.innerText = dbCustomers.length;
+}
+function setStatusTabFromDashboard(btn, status) {
+  showTab('customers');
+  var statusTabs = document.getElementById('status-tabs');
+  var buttons = statusTabs.querySelectorAll('.status-tab');
+  buttons.forEach(function(b) { b.classList.remove('active'); });
+  for (var i = 0; i < buttons.length; i++) {
+    var label = buttons[i].textContent.trim().split(' ')[0];
+    if (label === status) { buttons[i].classList.add('active'); break; }
+  }
+  currentStatusFilter = status;
+  renderCustomerCards();
+}
+
+/* ============================================================
+   SORT
+   ============================================================ */
+function sortByDropdown() {
+  var val = document.getElementById('sort-select').value;
+  if (val) { var parts = val.split('-'); sortColumn = parts[0]; sortDirection = parts[1]; }
+  else { sortColumn = ''; sortDirection = 'asc'; }
+  renderCustomerCards();
+}
+function sortPairs(pairs) {
+  if (!sortColumn) { pairs.reverse(); return; }
+  pairs.sort(function(a, b) {
+    var valA = (a.customer[sortColumn] || '').toString().toLowerCase();
+    var valB = (b.customer[sortColumn] || '').toString().toLowerCase();
+    if (valA < valB) return sortDirection === 'asc' ? -1 : 1;
+    if (valA > valB) return sortDirection === 'asc' ? 1 : -1;
+    return 0;
+  });
+}
+
+/* ============================================================
+   CUSTOMER CARDS
+   ============================================================ */
+var currentStatusFilter = '';
+
+function setStatusTab(btn, status) {
+  document.querySelectorAll('#status-tabs .status-tab').forEach(function(t) { t.classList.remove('active'); });
+  btn.classList.add('active');
+  currentStatusFilter = status;
+  renderCustomerCards();
+}
+
+function toggleMoreFilters() {
+  var el = document.getElementById('more-filters');
+  var toggle = document.querySelector('.more-filters-toggle');
+  if (el.classList.contains('show')) {
+    el.classList.remove('show');
+    toggle.innerText = '+ More filters';
+  } else {
+    el.classList.add('show');
+    toggle.innerText = '- Hide filters';
+  }
+}
+
+function getInitials(name) {
+  if (!name) return '?';
+  var parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].charAt(0);
+  return parts[0].charAt(0) + parts[parts.length - 1].charAt(0);
+}
+
+function getFilteredWithIndices() {
+  var searchText = (document.getElementById('search-input') || {}).value || '';
+  var garmentFilter = (document.getElementById('search-garment-filter') || {}).value || '';
+  var dateFilter = (document.getElementById('search-date-filter') || {}).value || '';
+  var search = searchText.toLowerCase().trim();
+  var pairs = [];
+  dbCustomers.forEach(function(c, index) {
+    var matchSearch = !search || (c.name && c.name.toLowerCase().indexOf(search) !== -1) || (c.phone && c.phone.toLowerCase().indexOf(search) !== -1) || (c.location && c.location.toLowerCase().indexOf(search) !== -1) || (c.garment && c.garment.toLowerCase().indexOf(search) !== -1) || (c.measurements && c.measurements.some(function(m) { return (m.name && m.name.toLowerCase().indexOf(search) !== -1) || (m.value && m.value.toLowerCase().indexOf(search) !== -1); }));
+    var matchGarment = !garmentFilter || (c.garment && c.garment.toLowerCase() === garmentFilter.toLowerCase());
+    var matchStatus = !currentStatusFilter || (c.status && c.status === currentStatusFilter);
+    var matchDate = !dateFilter || (c.date && c.date === dateFilter);
+    if (matchSearch && matchGarment && matchStatus && matchDate) pairs.push({ index: index, customer: c });
+  });
+  return pairs;
+}
+function renderCustomerCards() {
+  var cardsContainer = document.getElementById('customer-cards');
+  var resultCount = document.getElementById('result-count');
+  var pairs = getFilteredWithIndices();
+  sortPairs(pairs);
+  cardsContainer.innerHTML = '';
+  if (dbCustomers.length === 0) {
+    resultCount.innerText = '';
+    cardsContainer.innerHTML = '<div class="empty-state"><span class="empty-state-icon">&#128202;</span><div class="empty-state-text">No customers saved yet.</div><div class="empty-state-sub">Use the form to add your first customer!</div><button class="empty-state-btn" onclick="showTab(\'measurements\')">+ Add First Customer</button></div>';
+    return;
+  }
+  resultCount.innerText = 'Showing ' + pairs.length + ' of ' + dbCustomers.length + ' customer(s).';
+  if (pairs.length === 0) {
+    cardsContainer.innerHTML = '<div class="empty-state"><span class="empty-state-icon">&#128269;</span><div class="empty-state-text">No matching customers found.</div><div class="empty-state-sub">Try adjusting your search or filters.</div></div>';
+    return;
+  }
+  pairs.forEach(function(p) {
+    var c = p.customer;
+    var idx = p.index;
+    var card = document.createElement('div');
+    var status = c.status || 'Pending';
+    var borderClass = 'border-pending';
+    if (status === 'In Progress') borderClass = 'border-progress';
+    else if (status === 'Ready') borderClass = 'border-ready';
+    else if (status === 'Delivered') borderClass = 'border-delivered';
+    card.className = 'customer-card ' + borderClass;
+    card.onclick = function(e) { if (!e.target.closest('.card-action-btn') && !e.target.closest('.card-status-select')) showCustomerDetail(idx); };
+    var measCount = (c.measurements || []).length;
+    var initials = getInitials(c.name);
+    var phoneDigits = (c.phone || '').replace(/[^0-9]/g, '');
+    var waBtn = phoneDigits ? '<button class="card-action-btn card-action-wa" title="WhatsApp" onclick="event.stopPropagation();window.open(\'https://wa.me/' + phoneDigits + '\',\'_blank\')">&#128172;</button>' : '';
+    card.innerHTML =
+      '<div class="card-left">' +
+        '<div class="card-avatar">' + initials + '</div>' +
+        '<div class="card-main"><div class="card-name">' + c.name + '</div>' +
+        '<div class="card-meta">' +
+          '<span>&#128222; ' + c.phone + '</span>' +
+          (c.location ? '<span>&#128205; ' + c.location + '</span>' : '') +
+          '<span>&#128085; ' + c.garment + '</span>' +
+          '<span>&#128207; ' + measCount + ' measurement' + (measCount !== 1 ? 's' : '') + '</span>' +
+        '</div></div>' +
+      '</div>' +
+      '<div class="card-right">' +
+        '<select class="card-status-select" onclick="event.stopPropagation()" onchange="inlineStatusChange(' + idx + ', this.value)">' +
+          '<option value="Pending"' + (status === 'Pending' ? ' selected' : '') + '>Pending</option>' +
+          '<option value="In Progress"' + (status === 'In Progress' ? ' selected' : '') + '>In Progress</option>' +
+          '<option value="Ready"' + (status === 'Ready' ? ' selected' : '') + '>Ready</option>' +
+          '<option value="Delivered"' + (status === 'Delivered' ? ' selected' : '') + '>Delivered</option>' +
+        '</select>' +
+        '<div class="card-actions">' +
+          waBtn +
+          '<button class="card-action-btn card-action-edit" title="Edit" onclick="event.stopPropagation();editCustomer(' + idx + ')">&#9998;</button>' +
+        '</div>' +
+        '<span class="card-date">' + (c.date || '—') + '</span>' +
+      '</div>';
+    cardsContainer.appendChild(card);
+  });
+}
+function inlineStatusChange(index, newStatus) {
+  if (!dbCustomers[index]) return;
+  dbCustomers[index].status = newStatus;
+  saveCustomerToFirestore(dbCustomers[index], index);
+  updateStats(); updateNavBadge();
+  showToast('Status updated to "' + newStatus + '"');
+}
+function showCustomerDetail(index) {
+  var c = dbCustomers[index];
+  if (!c) return;
+  var status = c.status || 'Pending';
+  var statusClass = 'status-pending';
+  if (status === 'In Progress') statusClass = 'status-progress';
+  else if (status === 'Ready') statusClass = 'status-ready';
+  else if (status === 'Delivered') statusClass = 'status-delivered';
+  var measurementsHTML = '';
+  if (c.measurements && c.measurements.length > 0) {
+    measurementsHTML = '<div class="detail-measurements">';
+    c.measurements.forEach(function(m) {
+      measurementsHTML += '<div class="measurement-pill"><span class="pill-name">' + m.name + '</span><span class="pill-value">' + m.value + '</span></div>';
+    });
+    measurementsHTML += '</div>';
+  } else measurementsHTML = '<p style="color:#999;font-style:italic;">No measurements recorded.</p>';
+  var notesHTML = c.notes ? '<div class="detail-section-title">Notes</div><div class="detail-notes">' + c.notes + '</div>' : '';
+  var phoneDigits = (c.phone || '').replace(/[^0-9]/g, '');
+  var whatsappHTML = '';
+  if (phoneDigits) {
+    var msg = encodeURIComponent('Hello ' + c.name + ', your ' + c.garment + ' is ' + status + '.');
+    whatsappHTML = '<button class="btn-modal btn-modal-whatsapp" onclick="window.open(\'https://wa.me/' + phoneDigits + '?text=' + msg + '\', \'_blank\')">&#128172; WhatsApp</button>';
+  }
+  document.getElementById('modal-title').innerText = c.name;
+  document.getElementById('modal-body').innerHTML =
+    '<div class="detail-grid">' +
+      '<div class="detail-item"><div class="detail-label">Phone</div><div class="detail-value">' + c.phone + '</div></div>' +
+      '<div class="detail-item"><div class="detail-label">Location</div><div class="detail-value">' + (c.location || '—') + '</div></div>' +
+      '<div class="detail-item"><div class="detail-label">Garment Type</div><div class="detail-value">' + c.garment + '</div></div>' +
+      '<div class="detail-item"><div class="detail-label">Date</div><div class="detail-value">' + (c.date || '—') + '</div></div>' +
+      '<div class="detail-item"><div class="detail-label">Status</div><div class="detail-value"><span class="status-badge ' + statusClass + '">' + status + '</span></div></div>' +
+      '<div class="detail-item"><div class="detail-label">Measurements</div><div class="detail-value">' + (c.measurements || []).length + '</div></div>' +
+    '</div>' +
+    '<div class="detail-section-title">Measurements</div>' + measurementsHTML + notesHTML +
+    '<div class="modal-actions">' +
+      '<button class="btn-modal btn-modal-edit" onclick="editCustomer(' + index + ')">&#9998; Edit</button>' +
+      '<button class="btn-modal btn-modal-print" onclick="printCustomer(' + index + ')">&#128424; Print</button>' +
+      whatsappHTML +
+      '<button class="btn-modal btn-modal-delete" onclick="deleteCustomer(' + index + ')">&#128465; Delete</button>' +
+    '</div>';
+  document.getElementById('detail-modal').classList.add('show');
+}
+function closeDetail() { document.getElementById('detail-modal').classList.remove('show'); }
+function filterCustomers() { renderCustomerCards(); }
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-garment-filter').value = '';
+  document.getElementById('search-date-filter').value = '';
+  document.getElementById('sort-select').value = '';
+  sortColumn = ''; sortDirection = 'asc';
+  currentStatusFilter = '';
+  document.querySelectorAll('#status-tabs .status-tab').forEach(function(t) { t.classList.remove('active'); });
+  var allTab = document.querySelector('#status-tabs .status-tab');
+  if (allTab) allTab.classList.add('active');
+  renderCustomerCards();
+}
+function deleteCustomer(index) {
+  var c = dbCustomers[index];
+  if (!c) return;
+  if (!confirm('Delete customer: ' + c.name + '? This cannot be undone.')) return;
+  deleteCustomerFromFirestore(index);
+  dbCustomers.splice(index, 1);
+  updateNavBadge(); updateStats(); closeDetail(); renderCustomerCards();
+  showToast('Customer deleted.');
+}
+
+/* ============================================================
+   EXPORT CSV
+   ============================================================ */
+function exportCSV() {
+  if (dbCustomers.length === 0) { showToast('No customers to export.'); return; }
+  var csv = 'Date,Name,Phone,Location,Garment,Status,Measurements,Notes\n';
+  dbCustomers.forEach(function(c) {
+    var measurementsStr = (c.measurements || []).map(function(m) { return m.name + ': ' + m.value; }).join('; ');
+    var row = [
+      c.date || '', '"' + (c.name || '').replace(/"/g, '""') + '"',
+      '"' + (c.phone || '').replace(/"/g, '""') + '"', '"' + (c.location || '').replace(/"/g, '""') + '"',
+      '"' + (c.garment || '').replace(/"/g, '""') + '"', '"' + (c.status || 'Pending') + '"',
+      '"' + measurementsStr.replace(/"/g, '""') + '"', '"' + (c.notes || '').replace(/"/g, '""') + '"'
+    ];
+    csv += row.join(',') + '\n';
+  });
+  var blob = new Blob([csv], { type: 'text/csv' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = 'dabubu_customers_' + new Date().toISOString().split('T')[0] + '.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  showToast('CSV exported successfully!');
+}
+
+/* ============================================================
+   PRINT RECEIPT
+   ============================================================ */
+function printCustomer(index) {
+  var c = dbCustomers[index];
+  if (!c) return;
+  var printArea = document.getElementById('print-area');
+  var measurementsRows = '';
+  if (c.measurements && c.measurements.length > 0) {
+    measurementsRows = c.measurements.map(function(m) { return '<tr><td>' + m.name + '</td><td>' + m.value + '</td></tr>'; }).join('');
+  } else measurementsRows = '<tr><td colspan="2">No measurements recorded</td></tr>';
+  printArea.innerHTML =
+    '<div class="print-header"><h1>Dabubu Signature</h1><p>Custom fits, exceptional quality.</p></div>' +
+    '<div class="print-customer-info">' +
+      '<p><strong>Customer:</strong> ' + c.name + '</p>' +
+      '<p><strong>Phone:</strong> ' + c.phone + '</p>' +
+      '<p><strong>Location:</strong> ' + (c.location || '—') + '</p>' +
+      '<p><strong>Garment Type:</strong> ' + c.garment + '</p>' +
+      '<p><strong>Status:</strong> ' + (c.status || 'Pending') + '</p>' +
+      '<p><strong>Date:</strong> ' + (c.date || '—') + '</p>' +
+    '</div>' +
+    '<h3>Measurements</h3>' +
+    '<table class="print-measurements"><thead><tr><th>Measurement</th><th>Value</th></tr></thead><tbody>' + measurementsRows + '</tbody></table>' +
+    (c.notes ? '<h3>Notes</h3><p>' + c.notes + '</p>' : '') +
+    '<div class="print-footer">Dabubu Signature — Customer Measurement Record</div>';
+  printArea.style.display = 'block';
+  window.print();
+  printArea.style.display = 'none';
+  printArea.innerHTML = '';
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+var toastTimer = null;
+function showToast(message) {
+  var toast = document.getElementById('toast');
+  toast.innerText = message;
+  toast.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() { toast.classList.remove('show'); }, 3000);
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+updateNavBadge();
+updateStats();
+
+/* ============================================================
+   PWA SERVICE WORKER
+   ============================================================ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').catch(function() {});
+  });
+}
+</script>
+</body>
+</html>
