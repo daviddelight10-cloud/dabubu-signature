@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dabubu-v13';
+const CACHE_NAME = 'dabubu-v14';
 const ASSETS = [
   './',
   './index.html',
