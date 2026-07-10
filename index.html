@@ -655,6 +655,17 @@
   .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--emerald);color:white;padding:14px 28px;border-radius:4px;font-weight:500;font-size:15px;box-shadow:0 4px 15px rgba(0,0,0,.2);z-index:3000;opacity:0;transition:all .3s var(--ease);pointer-events:none;font-family:'Jost',sans-serif;}
   .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
 
+  /* ---------- Offline / Sync indicator ---------- */
+  .sync-badge{position:fixed;bottom:20px;left:12px;z-index:2900;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:20px;font-size:.78rem;font-weight:500;font-family:'Jost',sans-serif;box-shadow:0 4px 12px rgba(0,0,0,.18);transition:all .3s var(--ease);opacity:0;transform:translateY(20px);pointer-events:none;}
+  .sync-badge.show{opacity:1;transform:translateY(0);}
+  .sync-badge.offline{background:#8a6d3b;color:#fff;}
+  .sync-badge.syncing{background:var(--emerald);color:#fff;}
+  .sync-badge.online{background:var(--emerald);color:#fff;}
+  .sync-dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex-shrink:0;}
+  .sync-badge.offline .sync-dot{animation:pulse-dot 1.4s ease-in-out infinite;}
+  .sync-badge.syncing .sync-dot{animation:pulse-dot .6s ease-in-out infinite;}
+  @keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:.3;}}
+
   /* ---------- Print ---------- */
   @media print{
     body *{visibility:hidden;}
@@ -1166,9 +1177,10 @@
   </div>
 </div>
 
-<!-- ============ TOAST + PRINT ============ -->
+<!-- ============ TOAST + PRINT + SYNC ============ -->
 <div class="toast" id="toast"></div>
 <div id="print-area" style="display:none;"></div>
+<div class="sync-badge" id="sync-badge"><span class="sync-dot"></span><span id="sync-text"></span></div>
 
 <script>
 /* ============================================================
@@ -1239,9 +1251,129 @@ auth.onAuthStateChanged(function(user) {
 });
 
 /* ============================================================
+   OFFLINE DATA LAYER
+   Caches Firestore data in localStorage for offline access.
+   Queues writes when offline and replays when connectivity returns.
+   ============================================================ */
+var SYNC_QUEUE_KEY = 'dabubu_sync_queue';
+var CUSTOMERS_CACHE_KEY = 'dabubu_customers_cache';
+var isOnline = navigator.onLine;
+
+function showSyncBadge(type, text) {
+  var badge = document.getElementById('sync-badge');
+  var txt = document.getElementById('sync-text');
+  badge.className = 'sync-badge ' + type + ' show';
+  txt.textContent = text;
+}
+function hideSyncBadge() {
+  var badge = document.getElementById('sync-badge');
+  badge.classList.remove('show');
+}
+function setOnlineStatus() {
+  isOnline = navigator.onLine;
+  if (!isOnline) {
+    showSyncBadge('offline', 'Offline — changes will sync when reconnected');
+  } else {
+    showSyncBadge('online', 'Back online');
+    replaySyncQueue();
+  }
+}
+
+function cacheCustomersLocally() {
+  try {
+    localStorage.setItem(CUSTOMERS_CACHE_KEY, JSON.stringify(dbCustomers));
+  } catch(e) { console.error('Cache write error:', e); }
+}
+function loadCachedCustomers() {
+  try {
+    return JSON.parse(localStorage.getItem(CUSTOMERS_CACHE_KEY)) || [];
+  } catch(e) { return []; }
+}
+
+function getSyncQueue() {
+  try {
+    return JSON.parse(localStorage.getItem(SYNC_QUEUE_KEY)) || [];
+  } catch(e) { return []; }
+}
+function setSyncQueue(queue) {
+  try {
+    localStorage.setItem(SYNC_QUEUE_KEY, JSON.stringify(queue));
+  } catch(e) { console.error('Queue write error:', e); }
+}
+function addToSyncQueue(op) {
+  var queue = getSyncQueue();
+  queue.push(op);
+  setSyncQueue(queue);
+}
+
+var isSyncing = false;
+function replaySyncQueue() {
+  if (isSyncing) return;
+  var queue = getSyncQueue();
+  if (queue.length === 0) return;
+  isSyncing = true;
+  showSyncBadge('syncing', 'Syncing ' + queue.length + ' change' + (queue.length > 1 ? 's' : '') + '...');
+  var remaining = [];
+  var promises = queue.map(function(op) {
+    if (op.type === 'save') {
+      var cleanOp = Object.assign({}, op.customer);
+      delete cleanOp._tempId;
+      delete cleanOp._docId;
+      if (op.docId) {
+        return db.collection('customers').doc(op.docId).set(cleanOp)
+          .catch(function(err) { console.error('Sync save error:', err); remaining.push(op); });
+      } else {
+        return db.collection('customers').add(cleanOp)
+          .then(function(docRef) {
+            var idx = dbCustomers.findIndex(function(c) { return c._tempId === op.tempId; });
+            if (idx >= 0) { dbCustomers[idx]._docId = docRef.id; delete dbCustomers[idx]._tempId; }
+          })
+          .catch(function(err) { console.error('Sync add error:', err); remaining.push(op); });
+      }
+    } else if (op.type === 'delete') {
+      return db.collection('customers').doc(op.docId).delete()
+        .catch(function(err) { console.error('Sync delete error:', err); remaining.push(op); });
+    }
+    return Promise.resolve();
+  });
+  Promise.all(promises).then(function() {
+    setSyncQueue(remaining);
+    cacheCustomersLocally();
+    updateStats(); updateNavBadge(); renderCustomerCards();
+    isSyncing = false;
+    if (remaining.length === 0) {
+      showSyncBadge('online', 'All changes synced');
+      setTimeout(function() {
+        if (navigator.onLine) hideSyncBadge();
+        else setOnlineStatus();
+      }, 2000);
+      if (queue.length > 0) showToast(queue.length + ' change(s) synced to cloud.');
+    } else {
+      showSyncBadge('offline', remaining.length + ' change(s) still pending');
+    }
+  }).catch(function() { isSyncing = false; });
+}
+
+window.addEventListener('online', setOnlineStatus);
+window.addEventListener('offline', setOnlineStatus);
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'REPLAY_SYNC') {
+      replaySyncQueue();
+    }
+  });
+}
+
+/* ============================================================
    FIRESTORE DATA LAYER
    ============================================================ */
 function loadCustomersFromFirestore() {
+  if (!navigator.onLine) {
+    dbCustomers = loadCachedCustomers();
+    customersLoaded = true;
+    return Promise.resolve(dbCustomers);
+  }
   return db.collection('customers').get().then(function(snapshot) {
     dbCustomers = [];
     snapshot.forEach(function(doc) {
@@ -1250,11 +1382,12 @@ function loadCustomersFromFirestore() {
       dbCustomers.push(data);
     });
     customersLoaded = true;
+    cacheCustomersLocally();
     migrateLocalStorageData();
     return dbCustomers;
   }).catch(function(err) {
     console.error('Firestore load error:', err);
-    dbCustomers = JSON.parse(localStorage.getItem('customers')) || [];
+    dbCustomers = loadCachedCustomers();
     customersLoaded = true;
     return dbCustomers;
   });
@@ -1264,18 +1397,57 @@ function saveCustomerToFirestore(customer, index) {
     var docId = dbCustomers[index]._docId;
     customer._docId = docId;
     dbCustomers[index] = customer;
-    return db.collection('customers').doc(docId).set(customer).catch(function(err) { console.error('Save error:', err); });
+    cacheCustomersLocally();
+    if (!navigator.onLine) {
+      addToSyncQueue({ type: 'save', docId: docId, customer: customer });
+      return Promise.resolve();
+    }
+    var clean = Object.assign({}, customer);
+    delete clean._tempId;
+    delete clean._docId;
+    return db.collection('customers').doc(docId).set(clean)
+      .then(function() { cacheCustomersLocally(); })
+      .catch(function(err) {
+        console.error('Save error:', err);
+        addToSyncQueue({ type: 'save', docId: docId, customer: customer });
+        showToast('Save failed — queued for sync.');
+      });
   } else {
-    return db.collection('customers').add(customer).then(function(docRef) {
+    customer._tempId = 'tmp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+    dbCustomers.push(customer);
+    cacheCustomersLocally();
+    if (!navigator.onLine) {
+      addToSyncQueue({ type: 'save', tempId: customer._tempId, customer: customer });
+      return Promise.resolve();
+    }
+    var cleanAdd = Object.assign({}, customer);
+    delete cleanAdd._tempId;
+    delete cleanAdd._docId;
+    return db.collection('customers').add(cleanAdd).then(function(docRef) {
       customer._docId = docRef.id;
-      dbCustomers.push(customer);
-    }).catch(function(err) { console.error('Add error:', err); });
+      delete customer._tempId;
+      cacheCustomersLocally();
+    }).catch(function(err) {
+      console.error('Add error:', err);
+      addToSyncQueue({ type: 'save', tempId: customer._tempId, customer: customer });
+      showToast('Save failed — queued for sync.');
+    });
   }
 }
 function deleteCustomerFromFirestore(index) {
   if (dbCustomers[index] && dbCustomers[index]._docId) {
     var docId = dbCustomers[index]._docId;
-    return db.collection('customers').doc(docId).delete().catch(function(err) { console.error('Delete error:', err); });
+    if (!navigator.onLine) {
+      addToSyncQueue({ type: 'delete', docId: docId });
+      cacheCustomersLocally();
+      return Promise.resolve();
+    }
+    return db.collection('customers').doc(docId).delete()
+      .then(function() { cacheCustomersLocally(); })
+      .catch(function(err) {
+        console.error('Delete error:', err);
+        addToSyncQueue({ type: 'delete', docId: docId });
+      });
   }
 }
 function migrateLocalStorageData() {
@@ -1288,6 +1460,7 @@ function migrateLocalStorageData() {
     db.collection('customers').add(customer).then(function(docRef) {
       customer._docId = docRef.id;
       dbCustomers.push(customer);
+      cacheCustomersLocally();
       updateStats(); updateNavBadge(); renderCustomerCards();
     });
   });
@@ -1597,8 +1770,8 @@ document.getElementById('measurement-form').addEventListener('submit', function(
     var mValue = row.querySelector('.m-value').value.trim();
     if (mName && mValue) customer.measurements.push({ name: mName, value: mValue });
   });
-  if (editingIndex >= 0) { customer.date = dbCustomers[editingIndex].date || new Date().toISOString().split('T')[0]; saveCustomerToFirestore(customer, editingIndex); showToast('Customer details updated successfully!'); }
-  else { customer.date = new Date().toISOString().split('T')[0]; saveCustomerToFirestore(customer, -1); showToast('Measurements saved successfully!'); }
+  if (editingIndex >= 0) { customer.date = dbCustomers[editingIndex].date || new Date().toISOString().split('T')[0]; saveCustomerToFirestore(customer, editingIndex); showToast(navigator.onLine ? 'Customer details updated successfully!' : 'Saved offline — will sync when reconnected.'); }
+  else { customer.date = new Date().toISOString().split('T')[0]; saveCustomerToFirestore(customer, -1); showToast(navigator.onLine ? 'Measurements saved successfully!' : 'Saved offline — will sync when reconnected.'); }
   updateNavBadge(); updateStats();
   this.reset();
   document.getElementById('dynamic-measurements').innerHTML = '';
@@ -1937,6 +2110,7 @@ function showToast(message) {
    ============================================================ */
 updateNavBadge();
 updateStats();
+if (!navigator.onLine) setOnlineStatus();
 
 /* ============================================================
    PWA SERVICE WORKER
@@ -1956,6 +2130,14 @@ if ('serviceWorker' in navigator) {
     }).catch(function() {});
     navigator.serviceWorker.addEventListener('controllerchange', function() {
       window.location.reload();
+    });
+  });
+}
+
+if ('SyncManager' in window && 'serviceWorker' in navigator) {
+  navigator.serviceWorker.ready.then(function(reg) {
+    return reg.sync.register('dabubu-sync').catch(function(e) {
+      console.warn('Background Sync registration failed:', e);
     });
   });
 }
